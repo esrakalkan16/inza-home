@@ -1,0 +1,78 @@
+﻿@{
+    Layout = null;
+    string ctrl = (ViewContext.RouteData.Values["controller"]?.ToString() ?? "").ToLower();
+}
+<!doctype html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@ViewData["Title"] - Inza Home</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/css/site.css" rel="stylesheet" />
+</head>
+<body>
+
+    <!-- NAVBAR (her zaman transparan) -->
+    <nav class="navbar navbar-expand-lg navbar-dark custom-navbar fixed-top">
+        <div class="container">
+            <a class="navbar-brand fw-semibold" href="/">INZA HOME</a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"
+                    aria-controls="mainNav" aria-expanded="false" aria-label="Menüyü Aç">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="mainNav">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 small">
+                    <li class="nav-item"><a class="nav-link @(ctrl=="koltuklar"?"active":"")" href="/Koltuklar">Koltuklar</a></li>
+                    <li class="nav-item"><a class="nav-link @(ctrl=="koleksiyonlar"?"active":"")" href="/Koleksiyonlar">Koleksiyonlar</a></li>
+                    <li class="nav-item"><a class="nav-link @(ctrl=="showroom"?"active":"")" href="/Showroom">Showroom</a></li>
+                    <li class="nav-item"><a class="nav-link @(ctrl=="iletisim"?"active":"")" href="/Iletisim">İletişim</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="py-0">
+        @RenderBody()
+    </main>
+
+    <footer class="border-top mt-0 footer-dark">
+        <div class="container py-5">
+            <div class="row g-4 small">
+                <div class="col-12 col-md-4">
+                    <div class="fw-semibold">INZA HOME</div>
+                    <p class="text-white-75 mt-2">Sade ve zamansız koltuk tasarımları.</p>
+                </div>
+                <div class="col-6 col-md-2">
+                    <div class="fw-semibold mb-2">Site</div>
+                    <ul class="list-unstyled text-white-75">
+                        <li><a class="text-white-75 text-decoration-none" href="/Koltuklar">Koltuklar</a></li>
+                        <li><a class="text-white-75 text-decoration-none" href="/Koleksiyonlar">Koleksiyonlar</a></li>
+                        <li><a class="text-white-75 text-decoration-none" href="/Showroom">Showroom</a></li>
+                        <li><a class="text-white-75 text-decoration-none" href="/Iletisim">İletişim</a></li>
+                    </ul>
+                </div>
+                <div class="col-12 col-md-3">
+                    <div class="fw-semibold mb-2">İletişim</div>
+                    <p class="mb-1 text-white-75">Adres / Şehir</p>
+                    <p class="mb-1 text-white-75">Tel: 0 (xxx) xxx xx xx</p>
+                    <p class="mb-0 text-white-75">E-posta: info@inzahome.com</p>
+                </div>
+            </div>
+            <div class="d-flex justify-content-between pt-3 mt-3 border-top border-white-10 text-white-50">
+                <div>© @DateTime.Now.Year INZA HOME</div>
+                <div class="d-none d-md-block">KVKK | Çerez Politikası</div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

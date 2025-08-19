@@ -1,0 +1,41 @@
+## ---- Visual Studio / Rider ----
+.vs/
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+## ---- Build output ----
+bin/
+obj/
+out/
+
+## ---- Paket yöneticileri ----
+node_modules/
+packages/
+*.nupkg
+*.snupkg
+
+## ---- Logs & Temp ----
+*.log
+*.tlog
+*.tmp
+*.temp
+*.db
+*.db-shm
+*.db-wal
+
+## ---- Publish ----
+/wwwroot/lib/
+/wwwroot/node_modules/
+/wwwroot/dist/
+/wwwroot/build/
+
+## ---- Sistem dosyaları ----
+.DS_Store
+Thumbs.db
+
+## ---- Secrets (manuel ekleme unutma) ----
+appsettings.Development.json
+secrets.json

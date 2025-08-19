@@ -1,0 +1,80 @@
+﻿@{
+    ViewData["Title"] = "Ana Sayfa";
+
+    var slides = new (string File, string Title, string Desc, string Slug)[] {
+        ("Gonca.png", "Gonca", "Zamansız, yumuşak hatlar", "gonca"),
+        ("Beren.png", "Beren", "Modern ve konforlu", "beren"),
+        ("Sude.png",  "Sude",  "Sade & sıcak dokular", "sude"),
+        ("Cemre.png", "Cemre", "Minimal çizgiler", "cemre"),
+    };
+}
+
+<section class="hero-wrap">
+    <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="6000">
+
+        <div class="carousel-indicators">
+            @for (int i = 0; i < slides.Length; i++)
+            {
+                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="@i"
+                        class="@(i==0?"active":"")" aria-current="@(i==0?"true":"false")"></button>
+            }
+        </div>
+
+        <div class="carousel-inner">
+            @for (int i = 0; i < slides.Length; i++)
+            {
+                var s = slides[i];
+                <div class="carousel-item @(i==0?"active":"")">
+                    <img src="~/images/Koltuklar/@s.File" class="d-block w-100 hero-img zoom-img" alt="@s.Title">
+                    <div class="hero-overlay"></div>
+
+                    <div class="carousel-caption d-none d-md-block text-start caption-animate">
+                        <h2 class="display-6 fw-semibold">@s.Title</h2>
+                        <p class="lead mb-3">@s.Desc</p>
+                        <div class="d-flex gap-2">
+                            <a href="/Koltuklar/Detay/@s.Slug" class="btn btn-light rounded-pill px-4">Detay</a>
+                            <a href="/Koltuklar" class="btn btn-brown rounded-pill px-4">Tüm Koltuklar</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Önceki</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Sonraki</span>
+        </button>
+    </div>
+</section>
+
+@section Scripts {
+    <script>
+        (function () {
+          const carousel = document.getElementById('heroCarousel');
+          if (!carousel) return;
+
+          function resetCaptions() {
+            document.querySelectorAll('#heroCarousel .caption-animate')
+              .forEach(el => el.classList.remove('animate-in'));
+          }
+          function activateCaptionOf(activeItem) {
+            const cap = activeItem.querySelector('.caption-animate');
+            if (cap) requestAnimationFrame(() => setTimeout(() => cap.classList.add('animate-in'), 60));
+          }
+
+          // İlk yüklemede
+          const firstActive = carousel.querySelector('.carousel-item.active');
+          if (firstActive) activateCaptionOf(firstActive);
+
+          carousel.addEventListener('slide.bs.carousel', resetCaptions);
+          carousel.addEventListener('slid.bs.carousel', (e) => {
+            const it = e.relatedTarget || carousel.querySelector('.carousel-item.active');
+            if (it) activateCaptionOf(it);
+          });
+        })();
+    </script>
+}

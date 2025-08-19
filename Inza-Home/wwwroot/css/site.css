@@ -1,0 +1,170 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+:root {
+    --brown: #4A3B31;
+    --ivory: #F8F5F2;
+    --coal: #2E2E2E;
+    --green: #1F4D45;
+}
+
+body {
+    font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    background: var(--ivory);
+}
+
+h1, h2, .display-1, .display-2 {
+    font-family: 'Playfair Display', serif;
+    letter-spacing: .2px;
+}
+
+.text-brown {
+    color: var(--brown) !important;
+}
+
+.btn-brown {
+    background: var(--brown);
+    color: #fff;
+    border-radius: 999px;
+    padding: .6rem 1.1rem
+}
+
+    .btn-brown:hover {
+        filter: brightness(.95);
+    }
+
+.footer-dark {
+    background: #212529;
+    color: #fff;
+}
+
+    .footer-dark .text-white-75 {
+        color: #ffffffbf !important;
+    }
+
+/* ====== Navbar (always transparent) ====== */
+.navbar.custom-navbar {
+    background: rgba(0, 0, 0, 0.4); /* yarý saydam siyah */
+    backdrop-filter: blur(1px); /* hafif blur efekti */
+    -webkit-backdrop-filter: blur(4px); /* Safari desteði */
+    border-bottom: 1px solid rgba(255, 255, 255, 0%); /* alt çizgi */
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    padding: 0.8rem 0;
+}
+    /* Logo & Link renkleri */
+    .navbar.custom-navbar .navbar-brand,
+    .navbar.custom-navbar .nav-link {
+        color: #fff !important;
+        font-weight: 500;
+        letter-spacing: 0.5px;
+        text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+        transition: color 0.3s ease;
+    }
+
+        /* Hover efekti */
+        .navbar.custom-navbar .nav-link:hover {
+            color: #ddd !important;
+        }
+
+    /* Aktif sayfa için */
+    .navbar.custom-navbar .nav-link-active {
+        color: #fff !important;
+        border-bottom: 2px solid #fff; /* aktif olan linkin altýna ince çizgi */
+    }
+
+/* ====== Hero / Slider ====== */
+.hero-wrap, .carousel, .carousel-item {
+    height: 100vh;
+}
+
+.hero-img {
+    height: 100vh;
+    width: 100%;
+    object-fit: cover; /* Tam ekran, hafif kýrpabilir */
+    /* KIRPMA OLMASIN istiyorsan bir satýr aþaðýyý kullan: */
+    /* object-fit:contain; background:#000; */
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(0deg,rgba(0,0,0,.35),rgba(0,0,0,.15));
+}
+
+.carousel-caption {
+    bottom: 12%;
+    left: 6%;
+    right: auto;
+    text-shadow: 0 2px 12px rgba(0,0,0,.35);
+}
+
+@media (max-width:768px) {
+    .carousel-caption {
+        bottom: 10%;
+        left: 6%;
+        right: 6%;
+    }
+}
+
+/* Caption fade-up (sýralý) */
+.caption-animate > * {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity .55s ease, transform .55s ease;
+}
+
+.caption-animate.animate-in > h2 {
+    transition-delay: .05s;
+}
+
+.caption-animate.animate-in > p {
+    transition-delay: .15s;
+}
+
+.caption-animate.animate-in > div {
+    transition-delay: .25s;
+}
+
+.caption-animate.animate-in > * {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Slider image zoom (Ken Burns) */
+.carousel-item.active .zoom-img {
+    animation: zoomInSlow 6s ease-in-out forwards;
+    transform-origin: center;
+}
+
+.carousel-item:not(.active) .zoom-img {
+    animation: none;
+}
+
+@keyframes zoomInSlow {
+    0% {
+        transform: scale(1);
+    }
+
+    100% {
+        transform: scale(1.1);
+    }
+    /* %10 büyüme */
+}
