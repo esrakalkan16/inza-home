@@ -1,0 +1,268 @@
+﻿@model List<Inza_Home.Controllers.HomeController.CollectionModel>
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Koleksiyonlar";
+}
+
+<div class="hero-section">
+    <div class="container">
+        <div class="hero-content">
+            <h1 class="hero-title">Koleksiyonlarımız</h1>
+            <p class="hero-subtitle">Sade ve zamanasız koltuk tasarımları</p>
+        </div>
+    </div>
+</div>
+
+<div class="collections-container">
+    <div class="container">
+        @if (Model != null && Model.Any())
+        {
+            <div class="collections-grid">
+                @foreach (var item in Model)
+                {
+                    <div class="collection-item">
+                        <a href="@Url.Action("CollectionDetail", "Home", new { id = item.Id })" class="collection-link">
+                            <div class="collection-card">
+                                <div class="image-container">
+                                    <img src="@item.CoverImage" alt="@item.Name" class="collection-image" />
+                                    <div class="image-overlay">
+                                        <div class="overlay-content">
+                                            <h3 class="collection-name-overlay">@item.Name</h3>
+                                            <span class="view-text">Koleksiyonu İncele</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <div class="no-collections">
+                <p>Henüz koleksiyon bulunmamaktadır.</p>
+            </div>
+        }
+    </div>
+</div>
+<style>
+    /* Hero */
+    .hero-section {
+        background: linear-gradient(135deg,#faf9f7 0%,#f5f1eb 100%);
+        padding: 80px 0 60px;
+        margin-bottom: 60px;
+        position: relative;
+    }
+
+    .hero-content {
+        text-align: center;
+        max-width: 900px;
+        margin: 0 auto;
+    }
+
+    .hero-title {
+        font-size: 3.5rem;
+        font-weight: 300;
+        color: #8b7355;
+        margin-bottom: 20px;
+        letter-spacing: -1px;
+    }
+
+    .hero-subtitle {
+        font-size: 1.3rem;
+        color: #a68b5b;
+        font-weight: 300;
+        margin: 0;
+    }
+
+    /* Sayfa genişliği (daha büyük alan) */
+    .collections-container .container {
+        max-width: 1440px;
+    }
+    /* gerekirse 1600 yapabilirsin */
+    .collections-container {
+        padding-bottom: 80px;
+    }
+
+    /* GRID — Masaüstünde 4 sütun */
+    .collections-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(280px,1fr));
+        gap: 32px;
+        margin: 0 auto;
+    }
+
+    /* Kart */
+    .collection-item {
+        opacity: 0;
+        transform: translateY(30px);
+        animation: fadeInUp .6s ease forwards;
+    }
+
+    .collection-link {
+        text-decoration: none;
+        color: inherit;
+        display: block;
+    }
+
+    .collection-card {
+        background: #fdfcfa;
+        border-radius: 0;
+        overflow: hidden;
+        box-shadow: 0 4px 20px rgba(139,115,85,.15);
+        transition: all .4s ease;
+        height: 100%;
+    }
+
+        .collection-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(139,115,85,.25);
+        }
+
+    /* Görsel — fotoğrafın TAMAMI görünsün */
+    .image-container {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 4 / 3; /* daha büyük ve dik kart oranı */
+        overflow: hidden;
+        background: #f6f2ec;
+    }
+
+    .collection-image {
+        width: 100%;
+        height: 100%;
+        object-fit: contain; /* tamamı görünsün */
+        /* object-fit: cover;        /* dolgun görünüm istersen bunu aç, üstteki contain’i kapat */
+        object-position: center;
+        transition: transform .6s ease;
+        display: block;
+    }
+
+    .collection-card:hover .collection-image {
+        transform: scale(1.03);
+    }
+
+    /* Overlay */
+    .image-overlay {
+        position: absolute;
+        inset: 0;
+        background: rgba(139,115,85,.85);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity .4s ease;
+    }
+
+    .collection-card:hover .image-overlay {
+        opacity: 1;
+    }
+
+    .overlay-content {
+        text-align: center;
+        color: #fdfcfa;
+    }
+
+    .view-text {
+        font-size: 1.1rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        padding: 12px 24px;
+        border: 2px solid #fdfcfa;
+        display: inline-block;
+        transition: all .3s ease;
+    }
+
+        .view-text:hover {
+            background: #fdfcfa;
+            color: #8b7355;
+        }
+
+    /* Opsiyonel başlık alanları */
+    .card-content {
+        padding: 30px;
+        text-align: center;
+        background: #fdfcfa;
+    }
+
+    .collection-name {
+        font-size: 1.8rem;
+        font-weight: 400;
+        color: #8b7355;
+        margin: 0 0 20px;
+        letter-spacing: .5px;
+    }
+
+    /* Boş durum */
+    .no-collections {
+        text-align: center;
+        padding: 60px 20px;
+        color: #a68b5b;
+        font-size: 1.2rem;
+    }
+
+    /* Animasyon */
+    @@keyframes fadeInUp {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .collection-item:nth-child(1) {
+        animation-delay: .1s;
+    }
+
+    .collection-item:nth-child(2) {
+        animation-delay: .2s;
+    }
+
+    .collection-item:nth-child(3) {
+        animation-delay: .3s;
+    }
+
+    .collection-item:nth-child(4) {
+        animation-delay: .4s;
+    }
+
+    /* Responsive kırılımlar */
+    @@media (max-width: 1400px) {
+        .collections-grid {
+            grid-template-columns: repeat(3, minmax(260px,1fr));
+        }
+    }
+
+    @@media (max-width: 992px) {
+        .collections-grid {
+            grid-template-columns: repeat(2, minmax(260px,1fr));
+            gap: 28px;
+        }
+    }
+
+    @@media (max-width: 576px) {
+        .collections-grid {
+            grid-template-columns: 1fr;
+            gap: 22px;
+            padding: 0 15px;
+        }
+
+        .image-container {
+            aspect-ratio: 4 / 3;
+        }
+
+        .hero-title {
+            font-size: 2rem;
+        }
+    }
+
+    /* Genel tipografi */
+    body {
+        font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    }
+
+    * {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+</style>

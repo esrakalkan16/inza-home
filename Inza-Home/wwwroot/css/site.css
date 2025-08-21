@@ -110,11 +110,31 @@ h1, h2, .display-1, .display-2 {
 }
 
 .carousel-caption {
-    bottom: 12%;
-    left: 6%;
+    bottom: 6%;
+    left: 5%;
     right: auto;
     text-shadow: 0 2px 12px rgba(0,0,0,.35);
 }
+
+.hero-title {
+    display: block;
+    font-size: clamp(5rem, 5vw, 4.5rem);
+    font-family: 'Playfair Display', serif;
+}
+
+.hero-desc {
+    display: block;
+    margin-top: 0.6rem; 
+    font-size: 1.9rem; 
+    font-weight: 400;
+}
+
+#heroCarousel .carousel-caption .btn {
+    padding: .9rem 1.4rem !important;
+    font-size: 1.05rem !important;
+    border-radius: 999px;
+}
+
 
 @media (max-width:768px) {
     .carousel-caption {
@@ -168,3 +188,22 @@ h1, h2, .display-1, .display-2 {
     }
     /* %10 büyüme */
 }
+
+.split-parent,
+.split-text, .split-parent {
+    display: block;
+    overflow: hidden;
+    white-space: normal;
+    word-wrap: break-word;
+}
+
+.split-line {
+    display: block;
+}
+
+.split-word, .split-char {
+    display: inline-block;
+}
+
+
+

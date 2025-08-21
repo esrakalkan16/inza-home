@@ -28,14 +28,37 @@
                     <img src="~/images/Koltuklar/@s.File" class="d-block w-100 hero-img zoom-img" alt="@s.Title">
                     <div class="hero-overlay"></div>
 
-                    <div class="carousel-caption d-none d-md-block text-start caption-animate">
-                        <h2 class="display-6 fw-semibold">@s.Title</h2>
-                        <p class="lead mb-3">@s.Desc</p>
-                        <div class="d-flex gap-2">
+                    <div class="carousel-caption d-none d-md-block text-start">
+                        <h2 class="hero-title fw-semibold split-text"
+                            data-split="chars"
+                            data-delay="100"
+                            data-duration="0.6"
+                            data-ease="power3.out"
+                            data-threshold="0.1"
+                            data-root-margin="-100px"
+                            data-from='{"opacity":0,"y":40}'
+                            data-to='{"opacity":1,"y":0}'>
+                            @s.Title
+                        </h2>
+
+                        <p class="hero-desc split-text"
+                           data-split="words"
+                           data-delay="80"
+                           data-duration="0.55"
+                           data-ease="power3.out"
+                           data-threshold="0.1"
+                           data-root-margin="-100px"
+                           data-from='{"opacity":0,"y":24}'
+                           data-to='{"opacity":1,"y":0}'>
+                            @s.Desc
+                        </p>
+
+                        <div class="d-flex gap-2 mt-3">
                             <a href="/Koltuklar/Detay/@s.Slug" class="btn btn-light rounded-pill px-4">Detay</a>
                             <a href="/Koltuklar" class="btn btn-brown rounded-pill px-4">Tüm Koltuklar</a>
                         </div>
                     </div>
+
                 </div>
             }
         </div>
