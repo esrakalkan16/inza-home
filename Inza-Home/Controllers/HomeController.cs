@@ -62,6 +62,7 @@ namespace Inza_Home.Controllers
                     CoverImage = "/Images/Koleksiyonlar/Beren/Beren.png",
                     Images = new List<string>
             {
+                "/Images/Koleksiyonlar/Beren/Beren.png",
                 "/Images/Koleksiyonlar/Beren/2.png",
                 "/Images/Koleksiyonlar/Beren/3.png",
                 "/Images/Koleksiyonlar/Beren/4.png",
@@ -84,6 +85,7 @@ namespace Inza_Home.Controllers
                     CoverImage = "/Images/Koleksiyonlar/Gonca/Gonca.png",
                     Images = new List<string>
             {
+                "/Images/Koleksiyonlar/Gonca/Gonca.png",
                 "/Images/Koleksiyonlar/Gonca/2.png",
                 "/Images/Koleksiyonlar/Gonca/3.png",
                 "/Images/Koleksiyonlar/Gonca/4.png",

@@ -21,6 +21,10 @@ html {
     --ivory: #F8F5F2;
     --coal: #2E2E2E;
     --green: #1F4D45;
+    --nav-r: 142;
+    --nav-g: 135;
+    --nav-b: 121;
+    --nav-a: .40; /* opaklýk */
 }
 
 body {
@@ -58,31 +62,32 @@ h1, h2, .display-1, .display-2 {
     }
 
 /* ====== Navbar (always transparent) ====== */
+
 .navbar.custom-navbar {
-    background: rgba(0, 0, 0, 0.4); /* yarý saydam siyah */
-    backdrop-filter: blur(1px); /* hafif blur efekti */
-    -webkit-backdrop-filter: blur(4px); /* Safari desteði */
-    border-bottom: 1px solid rgba(255, 255, 255, 0%); /* alt çizgi */
+    /* Eski tarayýcýlar için düz fallback (þeffaf deðil) */
+    background-color: #8e8779;
+    /* Asýl þeffaf arka plan */
+    background: rgb(151 133 98 / 20%);
+    -webkit-backdrop-filter: blur(6px);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
     position: fixed;
     top: 0;
+    left: 0;
     width: 100%;
     z-index: 1000;
     padding: 0.8rem 0;
 }
-    /* Logo & Link renkleri */
+
+    /* Link renkleri (gerekirse) */
     .navbar.custom-navbar .navbar-brand,
     .navbar.custom-navbar .nav-link {
-        color: #fff !important;
-        font-weight: 500;
-        letter-spacing: 0.5px;
-        text-shadow: 0 1px 3px rgba(0,0,0,0.5);
-        transition: color 0.3s ease;
+        color: #fcf7f7b0 !important;
     }
 
-        /* Hover efekti */
         .navbar.custom-navbar .nav-link:hover {
-            color: #ddd !important;
+            color: #f3f1ed !important;
         }
+
 
     /* Aktif sayfa için */
     .navbar.custom-navbar .nav-link-active {

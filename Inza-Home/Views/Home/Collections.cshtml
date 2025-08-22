@@ -78,7 +78,7 @@
 
     /* Sayfa genişliği (daha büyük alan) */
     .collections-container .container {
-        max-width: 1440px;
+        max-width: 1760px;
     }
     /* gerekirse 1600 yapabilirsin */
     .collections-container {
@@ -88,8 +88,8 @@
     /* GRID — Masaüstünde 4 sütun */
     .collections-grid {
         display: grid;
-        grid-template-columns: repeat(4, minmax(280px,1fr));
-        gap: 32px;
+        grid-template-columns: repeat(3, minmax(420px, 1fr));
+        gap: 36px;
         margin: 0 auto;
     }
 
@@ -132,7 +132,7 @@
     .collection-image {
         width: 100%;
         height: 100%;
-        object-fit: contain; /* tamamı görünsün */
+        object-fit:cover; /* tamamı görünsün */
         /* object-fit: cover;        /* dolgun görünüm istersen bunu aç, üstteki contain’i kapat */
         object-position: center;
         transition: transform .6s ease;
@@ -226,16 +226,17 @@
         animation-delay: .4s;
     }
 
-    /* Responsive kırılımlar */
-    @@media (max-width: 1400px) {
+    @@media (min-width: 1600px) {
+
         .collections-grid {
-            grid-template-columns: repeat(3, minmax(260px,1fr));
+            grid-template-columns: repeat(3, minmax(560px, 1fr));
+            gap: 40px;
         }
     }
 
     @@media (max-width: 992px) {
         .collections-grid {
-            grid-template-columns: repeat(2, minmax(260px,1fr));
+            grid-template-columns: repeat(2, minmax(250px,1fr));
             gap: 28px;
         }
     }
@@ -264,5 +265,9 @@
     * {
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
+    }
+
+    .collection-card:hover .collection-image {
+        transform: scale(1.03);
     }
 </style>
