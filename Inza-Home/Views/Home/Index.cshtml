@@ -1,22 +1,22 @@
 ﻿@{
     ViewData["Title"] = "Ana Sayfa";
 
-    var slides = new (string File, string Title, string Desc, string Slug)[] {
-        ("Gonca.png", "Gonca", "Zamansız, yumuşak hatlar", "gonca"),
-        ("Beren.png", "Beren", "Modern ve konforlu", "beren"),
-        ("Sude.png",  "Sude",  "Sade & sıcak dokular", "sude"),
-        ("Cemre.png", "Cemre", "Minimal çizgiler", "cemre"),
+    var slides = new (string File, string Title, string Desc, int id)[] {
+        ("Gonca.png", "Gonca", "Zamansız, yumuşak hatlar", 1),
+        ("Beren.png", "Beren", "Modern ve konforlu", 2),
+        ("Sude.png",  "Sude",  "Sade & sıcak dokular", 3),
+        ("Cemre.png", "Cemre", "Minimal çizgiler", 4),
     };
 }
 
-<section class="hero-wrap">
-    <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="6000">
 
+<section class="hero-wrap" style="margin-top: -80px; padding-top: 80px;">
+    <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="6000">
         <div class="carousel-indicators">
             @for (int i = 0; i < slides.Length; i++)
             {
                 <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="@i"
-                        class="@(i==0?"active":"")" aria-current="@(i==0?"true":"false")"></button>
+                        class="@(i==0?"active":"")" aria-current="@(i==0?"true":"false")" aria-label="Slide @(i+1)"></button>
             }
         </div>
 
@@ -28,76 +28,340 @@
                     <img src="~/images/Koltuklar/@s.File" class="d-block w-100 hero-img zoom-img" alt="@s.Title">
                     <div class="hero-overlay"></div>
 
-                    <div class="carousel-caption d-none d-md-block text-start">
-                        <h2 class="hero-title fw-semibold split-text"
-                            data-split="chars"
-                            data-delay="100"
-                            data-duration="0.6"
-                            data-ease="power3.out"
-                            data-threshold="0.1"
-                            data-root-margin="-100px"
-                            data-from='{"opacity":0,"y":40}'
-                            data-to='{"opacity":1,"y":0}'>
-                            @s.Title
-                        </h2>
-
-                        <p class="hero-desc split-text"
-                           data-split="words"
-                           data-delay="80"
-                           data-duration="0.55"
-                           data-ease="power3.out"
-                           data-threshold="0.1"
-                           data-root-margin="-100px"
-                           data-from='{"opacity":0,"y":24}'
-                           data-to='{"opacity":1,"y":0}'>
-                            @s.Desc
-                        </p>
-
-                        <div class="d-flex gap-2 mt-3">
-                            <a href="/Koltuklar/Detay/@s.Slug" class="btn btn-light rounded-pill px-4">Detay</a>
-                            <a href="/Koltuklar" class="btn btn-brown rounded-pill px-4">Tüm Koltuklar</a>
+                    <div class="carousel-caption d-md-block text-start caption-animate">
+                        <h2 class="hero-title fw-semibold text-white mb-3">@s.Title</h2>
+                        <p class="hero-desc text-white-50 mb-4">@s.Desc</p>
+                        <div class="d-flex flex-column flex-md-row gap-3">
+                            <span class="star-border-container">
+                                <span class="border-gradient-top"></span>
+                                <span class="border-gradient-bottom"></span>
+                                <a asp-controller="Home" asp-action="CollectionDetail" asp-route-id="@s.id"
+                                   class="btn btn-light rounded-pill px-4 py-3 fw-medium">@HelperFunctions.Translate("Detay")</a>
+                            </span>
+                            <span class="star-border-container">
+                                <span class="border-gradient-top"></span>
+                                <span class="border-gradient-bottom"></span>
+                                <a asp-controller="Home" asp-action="Collections"
+                                   class="btn btn-brown rounded-pill px-4 py-3 fw-medium">@HelperFunctions.Translate("Koleksiyonlar")</a>
+                            </span>
                         </div>
                     </div>
-
                 </div>
             }
         </div>
 
         <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Önceki</span>
+            <span class="visually-hidden">@HelperFunctions.Translate("Önceki")</span>
         </button>
         <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Sonraki</span>
+            <span class="visually-hidden">@HelperFunctions.Translate("Sonraki")</span>
         </button>
+    </div>
+</section>
+
+
+<section id="collections" class="collections-section">
+
+    <!-- Gonca - Yazı solda, resim sağda -->
+    <div class="collection-block fade-up">
+        <div class="container">
+            <div class="row align-items-center">
+                <!-- Yazı -->
+                <div class="col-lg-6">
+                    <div class="content-wrap">
+                        <h2 class="h2 fw-bold mb-3">Gonca @HelperFunctions.Translate("Koleksiyonu")</h2>
+                        <p class="text-muted mb-4">
+                            @HelperFunctions.Translate("Gonca Koleksiyonu, zarif ve yumuşak hatlarıyla evinize sıcaklık katar. Doğal tonlar ve konforlu tasarımıyla, her yaşam alanına uyum sağlar. Minimalist detaylar, modern yaşamın ihtiyaçlarına cevap verirken, estetik bir dokunuş sunar.")
+                        </p>
+                        <a href="#" class="btn btn-brown rounded-pill px-4">Koleksiyonu İncele</a>
+                    </div>
+                </div>
+
+                <!-- Görsel -->
+                <div class="col-lg-6">
+                    <div class="image-box shadow-lg">
+                        <img src="~/images/Koltuklar/Gonca.png"
+                             alt="Gonca Koleksiyonu"
+                             class="img-fluid rounded-4">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Beren - Resim solda, yazı sağda -->
+    <div class="collection-block fade-up">
+        <div class="container">
+            <div class="row align-items-center">
+                <!-- Görsel -->
+                <div class="col-lg-6">
+                    <div class="image-box shadow-lg">
+                        <img src="~/images/Koltuklar/Beren.png"
+                             alt="Beren Koleksiyonu"
+                             class="img-fluid rounded-4">
+                    </div>
+                </div>
+
+                <!-- Yazı -->
+                <div class="col-lg-6">
+                    <div class="content-wrap">
+                        <h2 class="h2 fw-bold mb-3">Beren Koleksiyonu</h2>
+                        <p class="text-muted mb-4">
+                            Beren Koleksiyonu, modern yaşamın dinamik ruhunu yansıtır.
+                            Minimalist çizgileri, zarif detayları ve konforlu tasarımıyla hem estetik hem de işlevsellik ön plandadır.
+                            Evinizin her köşesine uyum sağlayan parçalar, yaşam alanlarınıza sofistike bir dokunuş katar.
+                        </p>
+                        <a href="#" class="btn btn-brown rounded-pill px-4">Koleksiyonu İncele</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sude - Yazı solda, resim sağda -->
+    <div class="collection-block fade-up">
+        <div class="container">
+            <div class="row align-items-center">
+                <!-- Yazı -->
+                <div class="col-lg-6">
+                    <div class="content-wrap">
+                        <h2 class="h2 fw-bold mb-3">Sude Koleksiyonu</h2>
+                        <p class="text-muted mb-4">
+                            Sude Koleksiyonu, doğallığın huzurunu ve çağdaş tasarımın sadeliğini bir araya getiriyor.
+                            Ferah oturma düzenleri, yumuşak tonlar ve zarif detaylarla evinize sıcaklık katar.
+                            Konforlu yaşam için tasarlanan parçalar, hem günlük kullanımda hem de özel anlarda keyifli bir ortam oluşturur.
+                        </p>
+                        <a href="#" class="btn btn-brown rounded-pill px-4">Koleksiyonu İncele</a>
+                    </div>
+                </div>
+
+                <!-- Görsel -->
+                <div class="col-lg-6">
+                    <div class="image-box shadow-lg">
+                        <img src="~/images/Koltuklar/Sude.png"
+                             alt="Sude Koleksiyonu"
+                             class="img-fluid rounded-4">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</section>
+
+
+
+<button onclick="ChangeLanguages('TR');">TURKISH</button>
+<button onclick="ChangeLanguages('EN');">English</button>
+<!-- SIMPLE CTA SECTION -->
+<section class="py-5" style="background: white;">
+    <div class="container py-5">
+        <div class="row justify-content-center text-center">
+            <div class="col-lg-8">
+                <div class="fade-in-up">
+                    <h2 class="display-6 fw-normal text-brown mb-4" style="font-family: 'Playfair Display', serif;">
+                        INZA HOME Hakkında Daha Fazla Bilgi Sahibi Olun
+                    </h2>
+                    <div class="d-flex flex-column flex-md-row gap-3 justify-content-center mt-4">
+                        <a asp-controller="Home" asp-action="AboutUs"
+                           class="btn btn-brown btn-lg rounded-pill px-5 py-3 fw-medium">Hakkımızda</a>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="intro-section position-relative">
+    <canvas id="silk-bg"></canvas>
+
+    <div class="container position-relative" style="z-index:2; text-align:center;">
+        <h1 class="creative-heading">
+            Modern <span class="highlight">çizgiler</span>, <em>zamansız</em> şıklık, <strong>gerçek</strong> huzur.
+        </h1>
+        <p class="section-subtitle mt-4" style="color: #dfdad7;">
+            Sadece mobilya değil, yaşam alanınıza <strong>ruh</strong> katıyoruz.
+        </p>
     </div>
 </section>
 
 @section Scripts {
     <script>
-        (function () {
-          const carousel = document.getElementById('heroCarousel');
-          if (!carousel) return;
+        document.addEventListener("DOMContentLoaded", () => {
+            const canvas = document.getElementById("silk-bg");
+            const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
 
-          function resetCaptions() {
-            document.querySelectorAll('#heroCarousel .caption-animate')
-              .forEach(el => el.classList.remove('animate-in'));
-          }
-          function activateCaptionOf(activeItem) {
-            const cap = activeItem.querySelector('.caption-animate');
-            if (cap) requestAnimationFrame(() => setTimeout(() => cap.classList.add('animate-in'), 60));
-          }
+            const scene = new THREE.Scene();
+            const camera = new THREE.OrthographicCamera(
+                -1, 1, 1, -1, 0, 1
+            );
 
-          // İlk yüklemede
-          const firstActive = carousel.querySelector('.carousel-item.active');
-          if (firstActive) activateCaptionOf(firstActive);
+            const vertexShader = `
+                varying vec2 vUv;
+                void main() {
+                    vUv = uv;
+                    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+                }
+            `;
 
-          carousel.addEventListener('slide.bs.carousel', resetCaptions);
-          carousel.addEventListener('slid.bs.carousel', (e) => {
-            const it = e.relatedTarget || carousel.querySelector('.carousel-item.active');
-            if (it) activateCaptionOf(it);
-          });
-        })();
+            const fragmentShader = `
+                varying vec2 vUv;
+                uniform float uTime;
+                uniform vec3 uColor;
+                uniform float uSpeed;
+                uniform float uScale;
+                uniform float uRotation;
+                uniform float uNoiseIntensity;
+
+                const float e = 2.71828182845904523536;
+
+                float noise(vec2 texCoord) {
+                  float G = e;
+                  vec2  r = (G * sin(G * texCoord));
+                  return fract(r.x * r.y * (1.0 + texCoord.x));
+                }
+
+                vec2 rotateUvs(vec2 uv, float angle) {
+                  float c = cos(angle);
+                  float s = sin(angle);
+                  mat2  rot = mat2(c, -s, s, c);
+                  return rot * uv;
+                }
+
+                void main() {
+                  float rnd = noise(gl_FragCoord.xy);
+                  vec2 uv = rotateUvs(vUv * uScale, uRotation);
+                  vec2 tex = uv * uScale;
+                  float tOffset = uSpeed * uTime;
+
+                  tex.y += 0.03 * sin(8.0 * tex.x - tOffset);
+
+                  float pattern = 0.6 +
+                                  0.4 * sin(5.0 * (tex.x + tex.y +
+                                                   cos(3.0 * tex.x + 5.0 * tex.y) +
+                                                   0.02 * tOffset) +
+                                           sin(20.0 * (tex.x + tex.y - 0.1 * tOffset)));
+
+                  vec4 col = vec4(uColor, 1.0) * vec4(pattern) - rnd / 15.0 * uNoiseIntensity;
+                  col.a = 1.0;
+                  gl_FragColor = col;
+                }
+            `;
+        const uniforms = {
+            uTime: { value: 0 },
+            uSpeed: { value: 0.05 },      
+            uScale: { value: 1.2 },
+            uRotation: { value: 0.2 },
+            uNoiseIntensity: { value: 0.6 },
+            uColor: { value: new THREE.Color(0.90, 0.80, 0.65) } 
+        };
+
+
+            const geometry = new THREE.PlaneGeometry(2, 2);
+            const material = new THREE.ShaderMaterial({
+                vertexShader,
+                fragmentShader,
+                uniforms
+            });
+
+            const mesh = new THREE.Mesh(geometry, material);
+            scene.add(mesh);
+
+            function animate() {
+                requestAnimationFrame(animate);
+                uniforms.uTime.value += 0.05;
+                renderer.render(scene, camera);
+            }
+            animate();
+
+            window.addEventListener("resize", () => {
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+        });
     </script>
+    <script>
+        // Carousel animation (korundu)
+        (function () {
+            const carousel = document.getElementById('heroCarousel');
+            if (!carousel) return;
+
+            function resetCaptions() {
+                document.querySelectorAll('.caption-animate').forEach(el => {
+                    el.classList.remove('animate-in');
+                });
+            }
+
+            function activateCaption(activeItem) {
+                const caption = activeItem.querySelector('.caption-animate');
+                if (caption) {
+                    setTimeout(() => caption.classList.add('animate-in'), 100);
+                }
+            }
+
+            const firstActive = carousel.querySelector('.carousel-item.active');
+            if (firstActive) activateCaption(firstActive);
+
+            carousel.addEventListener('slide.bs.carousel', resetCaptions);
+            carousel.addEventListener('slid.bs.carousel', (e) => {
+                activateCaption(e.relatedTarget);
+            });
+        })();
+
+        // Simple fade-in animation
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        // Initialize fade-in elements
+        document.querySelectorAll('.fade-in-up').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.8s ease';
+            observer.observe(el);
+        });
+
+        // Staggered animation delays
+        document.querySelectorAll('.fade-in-up').forEach((el, index) => {
+            el.style.transitionDelay = `${index * 0.1}s`;
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const blocks = document.querySelectorAll(".fade-up");
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("visible");
+                    }
+                });
+            }, { threshold: 0.3 });
+            blocks.forEach(block => observer.observe(block));
+        });
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const blocks = document.querySelectorAll(".fade-up");
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("visible");
+                    }
+                });
+            }, { threshold: 0.2 });
+            blocks.forEach(block => observer.observe(block));
+        });
+    </script>
+
 }

@@ -7,4 +7,8 @@
     <RootNamespace>Inza_Home</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\Languages\TRANSLATE_EN.txt" />
+  </ItemGroup>
+
 </Project>

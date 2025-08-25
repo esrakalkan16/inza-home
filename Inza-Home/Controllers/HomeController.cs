@@ -46,6 +46,11 @@ namespace Inza_Home.Controllers
             return View(collections);
         }
 
+        public IActionResult AboutUs()
+        {
+            return View();
+        }
+
 
 
         public IActionResult CollectionDetail(int id)
@@ -109,6 +114,12 @@ namespace Inza_Home.Controllers
             public string CoverImage { get; set; } = string.Empty;
             public string Description { get; set; } = string.Empty;
             public List<string> Images { get; set; } = new List<string>();
+        }
+
+        public IActionResult ChangeLanguages(string LANG)
+        {
+            SessionHelper.SetSessionValue("LANG", LANG);    
+            return RedirectToAction("Index", "Home");
         }
     }
 

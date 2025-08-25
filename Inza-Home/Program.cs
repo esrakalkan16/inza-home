@@ -2,9 +2,17 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30); // Session süresi
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
+builder.Services.AddHttpContextAccessor(); // IHttpContextAccessor servisini ekle
 
 var app = builder.Build();
-
+var accessor = app.Services.GetRequiredService<IHttpContextAccessor>();
+SessionHelper.Configure(accessor);
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
@@ -16,6 +24,7 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
+app.UseSession(); // Session aktif edildi
 app.UseRouting();
 
 app.UseAuthorization();

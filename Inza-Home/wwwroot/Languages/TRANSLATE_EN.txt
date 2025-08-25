@@ -1,0 +1,12 @@
+Detay=Detail
+Koleksiyonlar=Collections
+Önceki=Previous
+Sonraki=Next
+Ana Sayfa=Home
+Hakkýmýzda=About Us
+Ýletiþim=Contact
+Gizlilik Politikasý=Privacy Policy
+Kullaným Þartlarý=Terms of Use
+Yardým=Help
+Koleksiyonu=Collection
+Gonca Koleksiyonu, doðanýn dinginliðini modern çizgilerle buluþturarak yaþam alanlarýnýza zarafet katýyor.Þýklýðý ve rahatlýðý ayný anda sunan tasarýmlar, evinize sýcak ve davetkâr bir atmosfer kazandýrýr.=The Gonca Collection brings elegance to your living spaces by combining the serenity of nature with modern lines.With soft textures, spacious seating areas, and functional details, you'll feel comfortable at every moment of the day.Designs that offer both elegance and comfort create a warm and inviting atmosphere in your home.
