@@ -10,13 +10,15 @@
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
                     <a asp-action="Index" asp-controller="Home" class="text-decoration-none">
-                        <i class="bi bi-house"></i> Ana Sayfa
+                        <i class="bi bi-house"></i> @HelperFunctions.Translate("Anasayfa")
                     </a>
                 </li>
                 <li class="breadcrumb-item">
-                    <a asp-action="Collections" asp-controller="Home" class="text-decoration-none">Koleksiyonlar</a>
+                    <a asp-action="Collections" asp-controller="Home" class="text-decoration-none">
+                        @HelperFunctions.Translate("Koleksiyonlar")
+                    </a>
                 </li>
-                <li class="breadcrumb-item active">@Model.Name</li>
+                <li class="breadcrumb-item active">@HelperFunctions.Translate(Model.Name)</li>
             </ol>
         </nav>
 
@@ -27,7 +29,7 @@
                 <div class="image-gallery">
                     <!-- Main Image -->
                     <div class="main-image-container mb-4">
-                        <img id="mainImage" src="@Model.Images.FirstOrDefault()" alt="@Model.Name" class="main-image">
+                        <img id="mainImage" src="@Model.Images.FirstOrDefault()" alt="@HelperFunctions.Translate(Model.Name)" class="main-image">
                         <button class="zoom-btn" data-bs-toggle="modal" data-bs-target="#imageModal">
                             <i class="bi bi-arrows-fullscreen"></i>
                         </button>
@@ -47,7 +49,7 @@
                                 @for (int i = 0; i < Model.Images.Count; i++)
                                 {
                                     <div class="thumbnail @(i == 0 ? "active" : "")" data-index="@i">
-                                        <img src="@Model.Images[i]" alt="@Model.Name @(i + 1)" loading="lazy">
+                                        <img src="@Model.Images[i]" alt="@HelperFunctions.Translate(Model.Name) @(i + 1)" loading="lazy">
                                     </div>
                                 }
                             </div>
@@ -64,48 +66,48 @@
             <div class="col-lg-4">
                 <div class="info-card">
                     <div class="collection-header">
-                        <h1 class="collection-title">@Model.Name</h1>
+                        <h1 class="collection-title">@HelperFunctions.Translate(Model.Name)</h1>
                         <div class="title-underline"></div>
                     </div>
 
-                    <div class="collection-content">
-                        <p class="description">@Model.Description</p>
+                    <div class="collection-content" style="padding: 10px;">
+                        <p class="description">@HelperFunctions.Translate(Model.Description)</p>
 
                         <!-- Features -->
                         <div class="features mb-4">
-                            <h5 class="section-title">Özellikler</h5>
+                            <h5 class="section-title">@HelperFunctions.Translate("Özellikler")</h5>
                             <ul class="features-list">
-                                <li><i class="bi bi-check-circle-fill"></i> Premium kalite malzemeler</li>
-                                <li><i class="bi bi-check-circle-fill"></i> Modern ve şık tasarım</li>
-                                <li><i class="bi bi-check-circle-fill"></i> Uzun ömürlü kullanım</li>
-                                <li><i class="bi bi-check-circle-fill"></i> Kolay montaj sistemi</li>
+                                <li><i class="bi bi-check-circle-fill"></i> @HelperFunctions.Translate("Premium kalite malzemeler")</li>
+                                <li><i class="bi bi-check-circle-fill"></i> @HelperFunctions.Translate("Modern ve şık tasarım")</li>
+                                <li><i class="bi bi-check-circle-fill"></i> @HelperFunctions.Translate("Uzun ömürlü kullanım")</li>
+                                <li><i class="bi bi-check-circle-fill"></i> @HelperFunctions.Translate("Kolay montaj sistemi")</li>
                             </ul>
                         </div>
 
                         <!-- Action Buttons -->
                         <div class="action-buttons mb-4">
                             <button class="btn btn-primary btn-action w-100 mb-3" id="contactBtn">
-                                <i class="bi bi-envelope me-2"></i> İletişime Geç
+                                <i class="bi bi-envelope me-2"></i> @HelperFunctions.Translate("İletişime Geç")
                             </button>
                             <button class="btn btn-outline-secondary btn-action w-100" id="downloadBtn">
-                                <i class="bi bi-download me-2"></i> Katalog İndir
+                                <i class="bi bi-download me-2"></i> @HelperFunctions.Translate("Katalog İndir")
                             </button>
                         </div>
 
                         <!-- Share Section -->
                         <div class="share-section">
-                            <h6 class="section-title mb-3">Paylaş</h6>
+                            <h6 class="section-title mb-3">@HelperFunctions.Translate("Paylaş")</h6>
                             <div class="share-buttons">
-                                <button class="share-btn facebook" data-platform="facebook" title="Facebook'ta Paylaş">
+                                <button class="share-btn facebook" data-platform="facebook" title="@HelperFunctions.Translate("Facebook'ta Paylaş")">
                                     <i class="bi bi-facebook"></i>
                                 </button>
-                                <button class="share-btn twitter" data-platform="twitter" title="Twitter'da Paylaş">
+                                <button class="share-btn twitter" data-platform="twitter" title="@HelperFunctions.Translate("Twitter'da Paylaş")">
                                     <i class="bi bi-twitter"></i>
                                 </button>
-                                <button class="share-btn whatsapp" data-platform="whatsapp" title="WhatsApp'ta Paylaş">
+                                <button class="share-btn whatsapp" data-platform="whatsapp" title="@HelperFunctions.Translate("WhatsApp'ta Paylaş")">
                                     <i class="bi bi-whatsapp"></i>
                                 </button>
-                                <button class="share-btn copy" data-platform="copy" title="Linki Kopyala">
+                                <button class="share-btn copy" data-platform="copy" title="@HelperFunctions.Translate("Linki Kopyala")">
                                     <i class="bi bi-clipboard"></i>
                                 </button>
                             </div>
@@ -121,597 +123,115 @@
 <div class="modal fade" id="imageModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-fullscreen">
         <div class="modal-content bg-dark">
-            <div class="modal-header border-0">
-                <div class="modal-navigation">
-                    <button class="modal-nav-btn" id="modalPrev">
-                        <i class="bi bi-chevron-left"></i>
-                    </button>
-                    <span class="modal-counter text-white fw-semibold">
-                        <span id="modalCurrentIndex">1</span> / @Model.Images.Count
-                    </span>
-                    <button class="modal-nav-btn" id="modalNext">
-                        <i class="bi bi-chevron-right"></i>
-                    </button>
-                </div>
+            <div class="modal-header border-0 justify-content-end">
+                <span class="modal-counter text-white fw-semibold me-auto">
+                    <span id="modalCurrentIndex">1</span> / @Model.Images.Count
+                </span>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
             </div>
-            <div class="modal-body d-flex align-items-center justify-content-center">
-                <img id="modalImage" class="modal-image" src="" alt="">
+            <div class="modal-body d-flex align-items-center justify-content-center position-relative p-0">
+                <!-- Sol Navigasyon Oku -->
+                <button class="modal-nav-arrow modal-nav-left" id="modalPrev">
+                    <i class="bi bi-chevron-left"></i>
+                </button>
+
+                <!-- Resim Container -->
+                <div class="modal-image-container">
+                    <img id="modalImage" class="modal-image" src="@Model.Images.FirstOrDefault()" alt="">
+                </div>
+
+                <!-- Sağ Navigasyon Oku -->
+                <button class="modal-nav-arrow modal-nav-right" id="modalNext">
+                    <i class="bi bi-chevron-right"></i>
+                </button>
+
+                <!-- Alt Thumbnail Navigasyon -->
+                <div class="modal-thumbnails">
+                    <div class="modal-thumbnails-container">
+                        @for (int i = 0; i < Model.Images.Count; i++)
+                        {
+                            <div class="modal-thumbnail @(i == 0 ? "active" : "")" data-index="@i">
+                                <img src="@Model.Images[i]" alt="@Model.Name @(i + 1)" loading="lazy">
+                            </div>
+                        }
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
 
 <!-- Success Toast -->
 <div class="toast-container position-fixed bottom-0 end-0 p-3">
     <div id="successToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
         <div class="toast-body d-flex align-items-center">
             <i class="bi bi-check-circle-fill text-success me-2"></i>
-            <span id="toastMessage">İşlem başarılı!</span>
+            <span id="toastMessage">@HelperFunctions.Translate("İşlem başarılı!")</span>
         </div>
     </div>
 </div>
 
-<style>
-    :root {
-        --primary-dark: #1a1a1a;
-        --primary-light: #2d2d2d;
-        --accent-color: #daa520;
-        --text-primary: #333;
-        --text-secondary: #666;
-        --text-muted: #888;
-        --bg-light: #fafafa;
-        --border-light: #e8e8e8;
-        --white: #ffffff;
-        --shadow-light: 0 2px 15px rgba(0,0,0,0.08);
-        --shadow-medium: 0 4px 25px rgba(0,0,0,0.12);
-        --border-radius: 16px;
-        --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    .collection-detail-page {
-        padding-top: 120px;
-        padding-bottom: 80px;
-        min-height: 100vh;
-        background: var(--bg-light);
-    }
-
-    /* Breadcrumb - Layout fontlarıyla uyumlu */
-    .breadcrumb {
-        background: var(--white);
-        border-radius: var(--border-radius);
-        padding: 1rem 1.5rem;
-        box-shadow: var(--shadow-light);
-        font-family: 'Inter', sans-serif;
-        font-size: 0.9rem;
-        margin-bottom: 2rem;
-    }
-
-    .breadcrumb-item a {
-        color: var(--text-secondary);
-        transition: var(--transition);
-        text-decoration: none;
-    }
-
-        .breadcrumb-item a:hover {
-            color: var(--accent-color);
-        }
-
-    .breadcrumb-item.active {
-        color: var(--text-primary);
-        font-weight: 500;
-    }
-
-    /* Image Gallery */
-    .image-gallery {
-        background: var(--white);
-        border-radius: var(--border-radius);
-        padding: 2rem;
-        box-shadow: var(--shadow-light);
-    }
-
-    .main-image-container {
-        position: relative;
-        border-radius: var(--border-radius);
-        overflow: hidden;
-        background: var(--bg-light);
-        aspect-ratio: 16/10;
-        box-shadow: var(--shadow-medium);
-    }
-
-    .main-image {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transition: var(--transition);
-    }
-
-    .main-image-container:hover .main-image {
-        transform: scale(1.05);
-    }
-
-    .zoom-btn {
-        position: absolute;
-        top: 1.5rem;
-        right: 1.5rem;
-        width: 48px;
-        height: 48px;
-        border: none;
-        border-radius: 50%;
-        background: rgba(255,255,255,0.95);
-        backdrop-filter: blur(10px);
-        color: var(--text-primary);
-        cursor: pointer;
-        transition: var(--transition);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1.1rem;
-    }
-
-        .zoom-btn:hover {
-            background: var(--white);
-            transform: scale(1.1);
-            box-shadow: var(--shadow-medium);
-        }
-
-    .image-counter {
-        position: absolute;
-        bottom: 1.5rem;
-        right: 1.5rem;
-        background: rgba(26, 26, 26, 0.85);
-        backdrop-filter: blur(10px);
-        color: white;
-        padding: 0.75rem 1.25rem;
-        border-radius: 25px;
-        font-family: 'Inter', sans-serif;
-        font-weight: 500;
-        font-size: 0.9rem;
-    }
-
-    /* Thumbnails */
-    .thumbnails-wrapper {
-        display: flex;
-        align-items: center;
-        gap: 1.5rem;
-        margin-top: 2rem;
-    }
-
-    .nav-btn {
-        width: 44px;
-        height: 44px;
-        border: none;
-        border-radius: 50%;
-        background: var(--primary-dark);
-        color: white;
-        cursor: pointer;
-        transition: var(--transition);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1.1rem;
-    }
-
-        .nav-btn:hover:not(:disabled) {
-            background: var(--accent-color);
-            transform: scale(1.05);
-        }
-
-        .nav-btn:disabled {
-            background: var(--border-light);
-            color: var(--text-muted);
-            cursor: not-allowed;
-        }
-
-    .thumbnails-container {
-        flex: 1;
-        overflow: hidden;
-        border-radius: var(--border-radius);
-    }
-
-    .thumbnails-track {
-        display: flex;
-        gap: 1rem;
-        transition: var(--transition);
-    }
-
-    .thumbnail {
-        flex: 0 0 85px;
-        height: 65px;
-        border-radius: 12px;
-        overflow: hidden;
-        cursor: pointer;
-        border: 3px solid transparent;
-        transition: var(--transition);
-        box-shadow: var(--shadow-light);
-    }
-
-        .thumbnail img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .thumbnail:hover {
-            border-color: var(--accent-color);
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-medium);
-        }
-
-        .thumbnail.active {
-            border-color: var(--primary-dark);
-            box-shadow: var(--shadow-medium);
-        }
-
-    /* Info Card - Layout tasarımıyla uyumlu */
-    .info-card {
-        background: var(--white);
-        border-radius: var(--border-radius);
-        box-shadow: var(--shadow-light);
-        overflow: hidden;
-        position: sticky;
-        top: 140px;
-    }
-
-    .collection-header {
-        padding: 2.5rem 2rem 1.5rem;
-        border-bottom: 1px solid var(--border-light);
-    }
-
-    .collection-title {
-        font-family: 'Playfair Display', serif;
-        font-size: 2.25rem;
-        font-weight: 600;
-        color: var(--primary-dark);
-        margin-bottom: 0.75rem;
-        line-height: 1.2;
-    }
-
-    .title-underline {
-        width: 60px;
-        height: 3px;
-        background: var(--accent-color);
-        border-radius: 2px;
-    }
-
-    .collection-content {
-        padding: 2rem;
-    }
-
-    .description {
-        font-family: 'Inter', sans-serif;
-        color: var(--text-secondary);
-        margin-bottom: 2rem;
-        line-height: 1.7;
-        font-size: 1.05rem;
-    }
-
-    /* Features */
-    .section-title {
-        font-family: 'Inter', sans-serif;
-        color: var(--primary-dark);
-        font-weight: 600;
-        margin-bottom: 1rem;
-        font-size: 1.1rem;
-    }
-
-    .features-list {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-    }
-
-        .features-list li {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            margin-bottom: 0.75rem;
-            font-family: 'Inter', sans-serif;
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-        }
-
-        .features-list i {
-            color: var(--accent-color);
-            font-size: 1rem;
-        }
-
-    /* Buttons - Layout stil tutarlılığı */
-    .btn-action {
-        font-family: 'Inter', sans-serif;
-        font-weight: 500;
-        border-radius: var(--border-radius);
-        padding: 0.875rem 1.5rem;
-        transition: var(--transition);
-        border: none;
-        font-size: 0.95rem;
-    }
-
-    .btn-primary.btn-action {
-        background: var(--primary-dark);
-        color: white;
-    }
-
-        .btn-primary.btn-action:hover {
-            background: var(--accent-color);
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-medium);
-        }
-
-    .btn-outline-secondary.btn-action {
-        border: 2px solid var(--border-light);
-        color: var(--text-primary);
-        background: transparent;
-    }
-
-        .btn-outline-secondary.btn-action:hover {
-            border-color: var(--primary-dark);
-            color: var(--primary-dark);
-            background: rgba(26, 26, 26, 0.05);
-            transform: translateY(-2px);
-        }
-
-    /* Share Section */
-    .share-buttons {
-        display: flex;
-        gap: 1rem;
-    }
-
-    .share-btn {
-        width: 44px;
-        height: 44px;
-        border: none;
-        border-radius: 50%;
-        color: white;
-        cursor: pointer;
-        transition: var(--transition);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1.1rem;
-    }
-
-        .share-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-medium);
-        }
-
-        .share-btn.facebook {
-            background: #1877f2;
-        }
-
-        .share-btn.twitter {
-            background: #1da1f2;
-        }
-
-        .share-btn.whatsapp {
-            background: #25d366;
-        }
-
-        .share-btn.copy {
-            background: var(--text-muted);
-        }
-
-            .share-btn.copy:hover {
-                background: var(--primary-dark);
-            }
-
-    /* Modal */
-    .modal-navigation {
-        display: flex;
-        align-items: center;
-        gap: 1.5rem;
-    }
-
-    .modal-nav-btn {
-        width: 52px;
-        height: 52px;
-        border: none;
-        border-radius: 50%;
-        background: rgba(255,255,255,0.15);
-        backdrop-filter: blur(10px);
-        color: white;
-        cursor: pointer;
-        transition: var(--transition);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1.2rem;
-    }
-
-        .modal-nav-btn:hover {
-            background: rgba(255,255,255,0.25);
-            transform: scale(1.05);
-        }
-
-    .modal-counter {
-        font-family: 'Inter', sans-serif;
-        font-size: 1.1rem;
-    }
-
-    .modal-image {
-        max-width: 90%;
-        max-height: 85vh;
-        object-fit: contain;
-        border-radius: var(--border-radius);
-        box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-    }
-
-    /* Toast */
-    .toast {
-        background: var(--white);
-        border: none;
-        border-radius: var(--border-radius);
-        box-shadow: var(--shadow-medium);
-        font-family: 'Inter', sans-serif;
-    }
-
-    /* Responsive Design */
-   @@media (max-width: 992px) {
-        .collection-detail-page
-
-    {
-        padding-top: 100px;
-        padding-bottom: 60px;
-    }
-
-    .info-card {
-        position: static;
-        margin-top: 2rem;
-    }
-
-    .collection-header {
-        padding: 2rem 1.5rem 1rem;
-    }
-
-    .collection-content {
-        padding: 1.5rem;
-    }
-
-    .collection-title {
-        font-size: 1.875rem;
-    }
-
-    }
-
-    @@media (max-width: 768px) {
-        .collection-detail-page
-
-    {
-        padding-top: 80px;
-    }
-
-    .image-gallery {
-        padding: 1.5rem;
-    }
-
-    .thumbnails-wrapper {
-        gap: 1rem;
-    }
-
-    .nav-btn {
-        width: 40px;
-        height: 40px;
-    }
-
-    .thumbnail {
-        flex: 0 0 70px;
-        height: 55px;
-    }
-
-    .collection-title {
-        font-size: 1.5rem;
-    }
-
-    .zoom-btn, .image-counter {
-        top: 1rem;
-        right: 1rem;
-        bottom: 1rem;
-    }
-
-    .zoom-btn {
-        width: 42px;
-        height: 42px;
-    }
-
-    }
-
-    @@media (max-width: 576px) {
-        .breadcrumb
-
-    {
-        padding: 0.75rem 1rem;
-        font-size: 0.85rem;
-    }
-
-    .image-gallery {
-        padding: 1rem;
-    }
-
-    .collection-header {
-        padding: 1.5rem 1rem 0.75rem;
-    }
-
-    .collection-content {
-        padding: 1rem;
-    }
-
-    }
-
-    /* Smooth Animations */
-    .fade-in {
-        animation: fadeIn 0.4s ease-out;
-    }
-
-    @@keyframes fadeIn {
-        from
-
-    {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-
-    }
-</style>
-
 @section Scripts {
     <script>
+        // Mevcut CollectionGallery sınıfınıza bu ek fonksiyonları ekleyin
         class CollectionGallery {
             constructor() {
                 this.currentIndex = 0;
                 this.images = @Html.Raw(Json.Serialize(Model.Images));
                 this.thumbnailsPerView = 4;
                 this.currentThumbnailStart = 0;
-
                 this.init();
             }
 
             init() {
                 this.bindEvents();
                 this.updateThumbnailNavigation();
+                this.setImage(0);
+
+                // YENİ: Modal thumbnail'lar için event listener ekle
+                this.initModalThumbnails();
             }
 
             bindEvents() {
-                // Thumbnail clicks
+                // Mevcut kodlarınız aynen kalacak...
                 document.querySelectorAll('.thumbnail').forEach((thumb, index) => {
                     thumb.addEventListener('click', () => this.setImage(index));
                 });
 
-                // Thumbnail navigation
                 document.getElementById('prevThumb').addEventListener('click', () => {
                     this.navigateThumbnails(-1);
                 });
-
                 document.getElementById('nextThumb').addEventListener('click', () => {
                     this.navigateThumbnails(1);
                 });
 
-                // Modal navigation
+                document.getElementById('imageModal').addEventListener('show.bs.modal', () => {
+                    document.getElementById('modalImage').src = this.images[this.currentIndex];
+                });
+
                 document.getElementById('modalPrev').addEventListener('click', () => {
                     this.navigateImage(-1);
                 });
-
                 document.getElementById('modalNext').addEventListener('click', () => {
                     this.navigateImage(1);
                 });
 
-                // Action buttons
                 document.getElementById('contactBtn').addEventListener('click', () => {
-                    this.showToast('İletişim sayfasına yönlendiriliyorsunuz...');
-                    // Gerçek uygulamada: window.location.href = '/Iletisim';
+                   location.href = '/Home/Contact';
                 });
 
                 document.getElementById('downloadBtn').addEventListener('click', () => {
-                    this.showToast('Katalog indiriliyor...');
-                    // Gerçek uygulamada: katalog indirme işlemi
+                    const link = document.createElement('a');
+                    link.href = '/images/content.pdf';
+                    link.download = 'content.pdf'
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+
+                    this.showToast('@HelperFunctions.Translate("Katalog indiriliyor...")');
                 });
 
-                // Share buttons
                 document.querySelectorAll('.share-btn').forEach(btn => {
                     btn.addEventListener('click', () => {
                         const platform = btn.dataset.platform;
@@ -719,7 +239,6 @@
                     });
                 });
 
-                // Keyboard navigation for modal
                 document.addEventListener('keydown', (e) => {
                     const modal = document.getElementById('imageModal');
                     if (modal.classList.contains('show')) {
@@ -729,19 +248,23 @@
                 });
             }
 
+            // YENİ: Modal thumbnail navigation
+            initModalThumbnails() {
+                document.querySelectorAll('.modal-thumbnail').forEach((thumb, index) => {
+                    thumb.addEventListener('click', () => this.setImage(index));
+                });
+            }
+
             setImage(index) {
                 if (index < 0 || index >= this.images.length) return;
-
                 this.currentIndex = index;
 
                 // Update main image
                 const mainImg = document.getElementById('mainImage');
                 mainImg.src = this.images[index];
-                mainImg.classList.add('fade-in');
 
                 // Update modal image
-                const modalImg = document.getElementById('modalImage');
-                modalImg.src = this.images[index];
+                document.getElementById('modalImage').src = this.images[index];
 
                 // Update counters
                 document.getElementById('currentIndex').textContent = index + 1;
@@ -752,15 +275,13 @@
                     thumb.classList.toggle('active', i === index);
                 });
 
-                // Auto-scroll thumbnails if needed
-                this.scrollThumbnailsToShow(index);
-
-                // Remove animation class after animation
-                setTimeout(() => {
-                    mainImg.classList.remove('fade-in');
-                }, 400);
+                // YENİ: Update modal thumbnails
+                document.querySelectorAll('.modal-thumbnail').forEach((thumb, i) => {
+                    thumb.classList.toggle('active', i === index);
+                });
             }
 
+            // Mevcut diğer metodlarınız aynen kalacak...
             navigateImage(direction) {
                 const newIndex = this.currentIndex + direction;
                 if (newIndex >= 0 && newIndex < this.images.length) {
@@ -770,33 +291,18 @@
 
             navigateThumbnails(direction) {
                 const maxStart = Math.max(0, this.images.length - this.thumbnailsPerView);
-
                 if (direction === -1 && this.currentThumbnailStart > 0) {
                     this.currentThumbnailStart--;
                 } else if (direction === 1 && this.currentThumbnailStart < maxStart) {
                     this.currentThumbnailStart++;
                 }
-
                 this.updateThumbnailPosition();
                 this.updateThumbnailNavigation();
             }
 
-            scrollThumbnailsToShow(index) {
-                const visibleStart = this.currentThumbnailStart;
-                const visibleEnd = this.currentThumbnailStart + this.thumbnailsPerView - 1;
-
-                if (index < visibleStart || index > visibleEnd) {
-                    this.currentThumbnailStart = Math.max(0,
-                        Math.min(index - Math.floor(this.thumbnailsPerView / 2),
-                                this.images.length - this.thumbnailsPerView));
-                    this.updateThumbnailPosition();
-                    this.updateThumbnailNavigation();
-                }
-            }
-
             updateThumbnailPosition() {
                 const track = document.getElementById('thumbnailsTrack');
-                const translateX = -this.currentThumbnailStart * (85 + 16); // thumbnail width + gap
+                const translateX = -this.currentThumbnailStart * (85 + 16);
                 track.style.transform = `translateX(${translateX}px)`;
             }
 
@@ -804,30 +310,29 @@
                 const prevBtn = document.getElementById('prevThumb');
                 const nextBtn = document.getElementById('nextThumb');
                 const maxStart = Math.max(0, this.images.length - this.thumbnailsPerView);
-
                 prevBtn.disabled = this.currentThumbnailStart === 0;
                 nextBtn.disabled = this.currentThumbnailStart >= maxStart;
             }
 
             share(platform) {
                 const url = window.location.href;
-                const text = `${@Json.Serialize(Model.Name)} - INZA HOME'dan harika bir koleksiyon!`;
+                const text = `${@Json.Serialize(Model.Name)} - @HelperFunctions.Translate("INZA HOME'dan harika bir koleksiyon!")`;
 
                 switch (platform) {
                     case 'facebook':
-                        window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`, '_blank', 'width=600,height=400');
+                        window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`, '_blank');
                         break;
                     case 'twitter':
-                        window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`, '_blank', 'width=600,height=400');
+                        window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`, '_blank');
                         break;
                     case 'whatsapp':
                         window.open(`https://wa.me/?text=${encodeURIComponent(text + ' ' + url)}`, '_blank');
                         break;
                     case 'copy':
                         navigator.clipboard.writeText(url).then(() => {
-                            this.showToast('Link panoya kopyalandı!');
+                            this.showToast('@HelperFunctions.Translate("Link panoya kopyalandı!")');
                         }).catch(() => {
-                            this.showToast('Link kopyalanamadı.');
+                            this.showToast('@HelperFunctions.Translate("Link kopyalanamadı.")');
                         });
                         break;
                 }
@@ -837,18 +342,14 @@
                 const toast = document.getElementById('successToast');
                 const toastMessage = document.getElementById('toastMessage');
                 toastMessage.textContent = message;
-
-                const bsToast = new bootstrap.Toast(toast);
-                bsToast.show();
+                new bootstrap.Toast(toast).show();
             }
         }
 
-        // Initialize when DOM is ready
         document.addEventListener('DOMContentLoaded', () => {
             new CollectionGallery();
         });
     </script>
 
-    <!-- Bootstrap Icons CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
 }

@@ -1,0 +1,501 @@
+﻿@{
+    ViewData["Title"] = "İletişim";
+}
+
+<style>
+    :root {
+        --primary-brown: #8B7355;
+        --light-brown: #A68B5B;
+        --dark-brown: #6B5642;
+        --cream: #F8F6F3;
+        --dark-text: #2A2A2A;
+        --light-gray: #F5F5F5;
+        --soft-beige: #F9F7F4;
+    }
+
+    /* Contact Content */
+    .contact-content {
+        padding: 60px 0;
+        background: white;
+    }
+
+    .contact-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 60px;
+        align-items: start;
+        margin-bottom: 60px;
+    }
+
+    .section-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 2.5rem;
+        color: var(--primary-brown);
+        margin-bottom: 2rem;
+        font-weight: 500;
+    }
+
+    .section-subtitle {
+        color: #666;
+        font-size: 1.1rem;
+        margin-bottom: 3rem;
+        line-height: 1.7;
+    }
+
+    /* Contact Info Card - Single Card */
+    .contact-info-card {
+        background: var(--soft-beige);
+        padding: 40px;
+        border-radius: 20px;
+        box-shadow: 0 15px 40px rgba(139, 115, 85, 0.1);
+        border: 1px solid rgba(139, 115, 85, 0.08);
+    }
+
+    .info-section {
+        margin-bottom: 35px;
+        padding-bottom: 30px;
+        border-bottom: 1px solid rgba(139, 115, 85, 0.15);
+    }
+
+        .info-section:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+    .info-header {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 15px;
+    }
+
+    .info-icon {
+        width: 45px;
+        height: 45px;
+        background: var(--primary-brown);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 18px;
+    }
+
+    .info-title {
+        font-size: 1.3rem;
+        font-weight: 600;
+        color: var(--dark-text);
+        font-family: 'Playfair Display', serif;
+    }
+
+    .info-details {
+        margin-left: 60px;
+        color: #666;
+        line-height: 1.6;
+    }
+
+        .info-details strong {
+            color: var(--dark-text);
+            display: block;
+            margin-bottom: 5px;
+        }
+
+    .info-link {
+        color: var(--primary-brown);
+        text-decoration: none;
+        font-weight: 600;
+        transition: color 0.3s ease;
+    }
+
+        .info-link:hover {
+            color: var(--dark-brown);
+        }
+
+    /* Map Section */
+    .map-section {
+        background: var(--light-gray);
+        padding: 0;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    }
+
+    .map-container {
+        position: relative;
+        height: 450px;
+    }
+
+    .map-frame {
+        width: 100%;
+        height: 100%;
+        border: none;
+        border-radius: 15px;
+    }
+
+    .map-overlay {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        background: rgba(255,255,255,0.95);
+        backdrop-filter: blur(10px);
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        max-width: 280px;
+    }
+
+        .map-overlay h4 {
+            font-family: 'Playfair Display', serif;
+            color: var(--primary-brown);
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .map-overlay p {
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.4;
+            margin-bottom: 5px;
+        }
+
+    /* Form Styles */
+    .form-section {
+        grid-column: 1 / -1;
+        margin-top: 40px;
+    }
+
+    .modern-form {
+        background: var(--soft-beige);
+        padding: 50px;
+        border-radius: 15px;
+        box-shadow: 0 15px 40px rgba(139, 115, 85, 0.08);
+    }
+
+    .form-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 25px;
+        margin-bottom: 25px;
+    }
+
+    .form-group {
+        margin-bottom: 2rem;
+        position: relative;
+    }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+    .form-input, .form-textarea, .form-select {
+        width: 100%;
+        padding: 15px 20px;
+        border: 2px solid rgba(139, 115, 85, 0.1);
+        border-radius: 8px;
+        font-size: 16px;
+        font-family: 'Inter', sans-serif;
+        background: white;
+        transition: all 0.3s ease;
+        resize: vertical;
+    }
+
+        .form-input:focus, .form-textarea:focus, .form-select:focus {
+            outline: none;
+            border-color: var(--primary-brown);
+            box-shadow: 0 0 0 3px rgba(139, 115, 85, 0.1);
+        }
+
+    .form-label {
+        display: block;
+        margin-bottom: 8px;
+        color: var(--dark-text);
+        font-weight: 500;
+        font-size: 15px;
+    }
+
+    .submit-btn {
+        width: 100%;
+        background: var(--primary-brown);
+        color: white;
+        padding: 15px;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+        .submit-btn:hover {
+            background: var(--dark-brown);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(139, 115, 85, 0.3);
+        }
+
+    /* Animations */
+    .fade-in {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.8s ease;
+    }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+    /* Responsive */
+    @@media (max-width: 992px) {
+        .contact-grid
+
+    {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .modern-form {
+        padding: 35px 25px;
+    }
+
+    }
+
+    @@media (max-width: 768px) {
+        .contact-content
+
+    {
+        padding: 40px 0;
+    }
+
+    .modern-form {
+        padding: 30px 20px;
+    }
+
+    .contact-info-card {
+        padding: 30px 25px;
+    }
+
+    .info-details {
+        margin-left: 0;
+        margin-top: 15px;
+    }
+
+    .info-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .map-container {
+        height: 350px;
+    }
+
+    .map-overlay {
+        position: relative;
+        margin: 15px;
+        max-width: none;
+    }
+
+    }
+</style>
+
+<!-- Contact Content -->
+<section class="contact-content">
+    <div class="container">
+        <div class="contact-grid">
+            <!-- Contact Info Section - Single Card -->
+            <div class="fade-in">
+                <h2 class="section-title">@HelperFunctions.Translate("İletişim Bilgileri")</h2>
+                <p class="section-subtitle">
+                    @HelperFunctions.Translate("25 yıllık tecrübemizle koltuk, kanepe ve oturma grupları konusunda size en iyi hizmeti sunuyoruz.")
+                </p>
+                    <div class="info-section">
+                        <div class="info-header">
+                            <div class="info-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <h3 class="info-title">@HelperFunctions.Translate("Telefon")</h3>
+                        </div>
+                        <div class="info-details">
+                            <strong><a href="tel:+905337924860" class="info-link">0533 792 48 60</a></strong>
+                            @HelperFunctions.Translate("Pazartesi - Cumartesi")<br>
+                            09:00 - 18:00
+                        </div>
+                    </div>
+
+                    <div class="info-section">
+                        <div class="info-header">
+                            <div class="info-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <h3 class="info-title">@HelperFunctions.Translate("E-posta")</h3>
+                        </div>
+                        <div class="info-details">
+                            <strong><a href="mailto:info@inzahome.com" class="info-link">info@inzahome.com</a></strong>
+                            @HelperFunctions.Translate("24 saat içinde yanıtlıyoruz")
+                        </div>
+                    </div>
+
+                    <div class="info-section">
+                        <div class="info-header">
+                            <div class="info-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <h3 class="info-title">@HelperFunctions.Translate("Adres")</h3>
+                        </div>
+                        <div class="info-details">
+                            <strong>INZA HOME FURNITURE</strong>
+                            Koltuk Kanepe Oturma Grupları<br>
+                            Vakıf Mah. Vakıfköy Cad. No:38/6<br>
+                            Yıldırım/BURSA
+                        </div>
+                    </div>
+
+                    <div class="info-section">
+                        <div class="info-header">
+                            <div class="info-icon">
+                                <i class="fas fa-couch"></i>
+                            </div>
+                            <h3 class="info-title">@HelperFunctions.Translate("Hizmetlerimiz")</h3>
+                        </div>
+                        <div class="info-details">
+                            <strong>@HelperFunctions.Translate("Uzmanlaştığımız Alanlar")</strong>
+                            • Koltuk ve Kanepe Üretimi<br>
+                            • Oturma Grupları<br>
+                            • Özel Tasarım Mobilya<br>
+                            • Kumaş ve Renk Seçenekleri
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Map Section -->
+            <div class="fade-in">
+                <h2 class="section-title">@HelperFunctions.Translate("Konum")</h2>
+                <p class="section-subtitle">
+                    @HelperFunctions.Translate("Bursa Yıldırım'da bulunan showroomumuzda ürünlerimizi yakından inceleyebilirsiniz.")
+                </p>
+
+                <div class="map-section">
+                    <div class="map-container">
+                        <div class="map-overlay">
+                            <h4>INZA HOME FURNITURE</h4>
+                            <p><i class="fas fa-map-marker-alt" style="color: var(--primary-brown); margin-right: 5px;"></i> Vakıf Mah. Vakıfköy Cad. No:38/6</p>
+                            <p><i class="fas fa-location-dot" style="color: var(--primary-brown); margin-right: 5px;"></i> Yıldırım/BURSA</p>
+                            <p><i class="fas fa-phone" style="color: var(--primary-brown); margin-right: 5px;"></i> 0533 792 48 60</p>
+                        </div>
+                        <iframe class="map-frame"
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3048.123!2d29.123!3d40.123!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sVak%C4%B1f%20Mah.%20Vak%C4%B1fk%C3%B6y%20Cad.%20No%3A38%2F6%20Y%C4%B1ld%C4%B1r%C4%B1m%2FBURSA!5e0!3m2!1str!2str!4v1640000000000"
+                                allowfullscreen=""
+                                loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Form Section -->
+            <div class="form-section fade-in">
+                <h2 class="section-title">@HelperFunctions.Translate("Bize Yazın")</h2>
+                <p class="section-subtitle">
+                    @HelperFunctions.Translate("Merak ettiklerinizi, özel tasarım taleplerinizi veya showroom randevunuzu aşağıdaki formu doldurarak iletebilirsiniz.")
+                </p>
+
+                <form class="modern-form" action="@Url.Action("ContactForm","Home")" method="post">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label class="form-label">@HelperFunctions.Translate("Ad Soyad") *</label>
+                            <input type="text" name="FullName" class="form-input" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">@HelperFunctions.Translate("Telefon") *</label>
+                            <input type="tel" name="Phone" class="form-input" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">@HelperFunctions.Translate("E-posta Adresi") *</label>
+                        <input type="email" name="Email" class="form-input" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">@HelperFunctions.Translate("İlgilendiğiniz Ürün")</label>
+                        <select name="ProductType" class="form-select">
+                            <option value="">@HelperFunctions.Translate("Seçiniz...")</option>
+                            <option value="koltuk">@HelperFunctions.Translate("Koltuk")</option>
+                            <option value="kanepe">@HelperFunctions.Translate("Kanepe")</option>
+                            <option value="oturma-grubu">@HelperFunctions.Translate("Oturma Grubu")</option>
+                            <option value="ozel-tasarim">@HelperFunctions.Translate("Özel Tasarım")</option>
+                            <option value="diger">@HelperFunctions.Translate("Diğer")</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">@HelperFunctions.Translate("Mesajınız") *</label>
+                        <textarea name="Message" class="form-textarea" rows="5" placeholder="@HelperFunctions.Translate("Lütfen ihtiyaçlarınızı detaylı bir şekilde belirtiniz...")" required></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-btn">
+                        @HelperFunctions.Translate("Mesaj Gönder")
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <script>
+        // Intersection Observer for fade-in animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all fade-in elements
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Form submission handling
+        document.querySelector('.modern-form').addEventListener('submit', function(e) {
+            const submitBtn = this.querySelector('.submit-btn');
+            const originalText = submitBtn.textContent;
+
+            submitBtn.textContent = '@HelperFunctions.Translate("Gönderiliyor...")';
+            submitBtn.disabled = true;
+
+            // Form will be handled by the server
+        });
+
+        // Smooth hover effects
+        document.querySelectorAll('.info-section').forEach(section => {
+            section.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateX(5px)';
+                this.style.backgroundColor = 'rgba(139, 115, 85, 0.05)';
+            });
+
+            section.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateX(0)';
+                this.style.backgroundColor = 'transparent';
+            });
+        });
+    </script>
+}

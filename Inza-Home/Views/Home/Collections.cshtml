@@ -1,14 +1,14 @@
 ﻿@model List<Inza_Home.Controllers.HomeController.CollectionModel>
 @{
     Layout = "_Layout";
-    ViewData["Title"] = "Koleksiyonlar";
+    ViewData["Title"] = @HelperFunctions.Translate("Koleksiyonlar");
 }
 
 <div class="hero-section">
     <div class="container">
         <div class="hero-content">
-            <h1 class="hero-title">Koleksiyonlarımız</h1>
-            <p class="hero-subtitle">Sade ve zamanasız koltuk tasarımları</p>
+            <h1 class="hero-title">@HelperFunctions.Translate("Koleksiyonlarımız")</h1>
+            <p class="hero-subtitle">@HelperFunctions.Translate("Sade ve zamansız koltuk tasarımları.")</p>
         </div>
     </div>
 </div>
@@ -28,7 +28,7 @@
                                     <div class="image-overlay">
                                         <div class="overlay-content">
                                             <h3 class="collection-name-overlay">@item.Name</h3>
-                                            <span class="view-text">Koleksiyonu İncele</span>
+                                            <span class="view-text">@HelperFunctions.Translate("Koleksiyonu İncele")</span>
                                         </div>
                                     </div>
                                 </div>
@@ -41,7 +41,7 @@
         else
         {
             <div class="no-collections">
-                <p>Henüz koleksiyon bulunmamaktadır.</p>
+                <p>@HelperFunctions.Translate("Henüz koleksiyon bulunmamaktadır.")</p>
             </div>
         }
     </div>

@@ -2,6 +2,7 @@
 {
     public class HelperFunctions
     {
+
         public static string Translate(string TEXT)
         {
             try
@@ -12,7 +13,7 @@
                     var FilePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Languages", "TRANSLATE_EN.txt");
                     if (File.Exists(FilePath))
                     {
-                        var lines = File.ReadAllLines(FilePath);
+                        var lines = File.ReadAllLines(FilePath,System.Text.Encoding.UTF8);
                         foreach (var line in lines)
                         {
                             var parts = line.Split('=');

@@ -15,7 +15,15 @@ namespace Inza_Home.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var slides = new List<CollectionModel>
+    {
+        new CollectionModel { Id = 3, Name = "Gonca", Description = HelperFunctions.Translate("Zamansýz, yumuþak hatlar"), CoverImage = "Gonca.png" },
+        new CollectionModel { Id = 1, Name = "Beren", Description = HelperFunctions.Translate("Modern ve konforlu"), CoverImage = "Beren.png" },
+        new CollectionModel { Id = 2, Name = "Sude",  Description = HelperFunctions.Translate("Sade & sýcak dokular"), CoverImage = "Sude.png" },
+        new CollectionModel { Id = 4, Name = "Cemre", Description = HelperFunctions.Translate("Minimal çizgiler"), CoverImage = "Cemre.png" }
+    };
+
+            return View(slides);
         }
 
         public IActionResult Privacy()
@@ -29,7 +37,10 @@ namespace Inza_Home.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-
+        public IActionResult Contact()
+        {
+            return View();
+        }   
 
         public IActionResult Collections()
         {
@@ -37,9 +48,9 @@ namespace Inza_Home.Controllers
             var collections = new List<CollectionModel>
             {
                 new CollectionModel { Id = 1, Name = "Beren Koleksiyonu", CoverImage = "/Images/Koleksiyonlar/Beren/Beren.png"  },
-                new CollectionModel { Id = 2, Name = "Gonca Koleksiyonu", CoverImage = "/Images/Koleksiyonlar/Gonca/Gonca.png" },
-                 new CollectionModel { Id = 3, Name = "Beren Koleksiyonu", CoverImage = "/Images/Koleksiyonlar/Beren/Beren.png"  },
-                new CollectionModel { Id = 4, Name = "Gonca Koleksiyonu", CoverImage = "/Images/Koleksiyonlar/Gonca/Gonca.png" }
+                new CollectionModel { Id = 2, Name = "Sude Koleksiyonu", CoverImage = "/Images/Koleksiyonlar/Sude/Sude.png" },
+                 new CollectionModel { Id = 3, Name = "Gonca Koleksiyonu", CoverImage = "/Images/Koleksiyonlar/Gonca/Gonca.png"  },
+                new CollectionModel { Id = 4, Name = "Cemre Koleksiyonu", CoverImage = "/Images/Koleksiyonlar/Cemre/Cemre.png" }
 
             };
 
@@ -57,51 +68,85 @@ namespace Inza_Home.Controllers
         {
             var collection = new CollectionModel();
 
-            if (id == 1 || id == 3)
+            switch (id)
             {
-                collection = new CollectionModel
+                case 1:
+                    collection = new CollectionModel
+                    {
+                        Id = 1,
+                        Name = "Beren Koleksiyonu",
+                        Description = "Beren Koleksiyonu modern tasarýmýyla dikkat çekiyor...",
+                        CoverImage = "/Images/Koleksiyonlar/Beren/Beren.png",
+                        Images = new List<string>
                 {
-                    Id = 1,
-                    Name = "Beren Koleksiyonu",
-                    Description = "Beren Koleksiyonu modern tasarýmýyla dikkat çekiyor...",
-                    CoverImage = "/Images/Koleksiyonlar/Beren/Beren.png",
-                    Images = new List<string>
-            {
-                "/Images/Koleksiyonlar/Beren/Beren.png",
-                "/Images/Koleksiyonlar/Beren/2.png",
-                "/Images/Koleksiyonlar/Beren/3.png",
-                "/Images/Koleksiyonlar/Beren/4.png",
-                "/Images/Koleksiyonlar/Beren/5.png",
-                "/Images/Koleksiyonlar/Beren/6.png",
-                "/Images/Koleksiyonlar/Beren/7.png",
-                "/Images/Koleksiyonlar/Beren/8.png",
-                "/Images/Koleksiyonlar/Beren/9.png",
-                "/Images/Koleksiyonlar/Beren/10.png"
-            }
-                };
-            }
-            else if (id == 2 || id == 4)
-            {
-                collection = new CollectionModel
+                    "/Images/Koleksiyonlar/Beren/Beren.png",
+                    "/Images/Koleksiyonlar/Beren/2.png",
+                    "/Images/Koleksiyonlar/Beren/3.png",
+                    "/Images/Koleksiyonlar/Beren/4.png",
+                    "/Images/Koleksiyonlar/Beren/5.png",
+                    "/Images/Koleksiyonlar/Beren/6.png",
+                    "/Images/Koleksiyonlar/Beren/7.png",
+                    "/Images/Koleksiyonlar/Beren/8.png",
+                    "/Images/Koleksiyonlar/Beren/9.png",
+                    "/Images/Koleksiyonlar/Beren/10.png"
+                }
+                    };
+                    break;
+
+                case 2:
+                    collection = new CollectionModel
+                    {
+                        Id = 2,
+                        Name = "Sude Koleksiyonu",
+                        Description = "Sade & sýcak dokular",
+                        CoverImage = "/Images/Koleksiyonlar/Sude/Sude.png",
+                        Images = new List<string>
                 {
-                    Id = 2,
-                    Name = "Gonca Koleksiyonu",
-                    Description = "Gonca Koleksiyonu þýklýðýyla yaþam alanýnýza deðer katar...",
-                    CoverImage = "/Images/Koleksiyonlar/Gonca/Gonca.png",
-                    Images = new List<string>
-            {
-                "/Images/Koleksiyonlar/Gonca/Gonca.png",
-                "/Images/Koleksiyonlar/Gonca/2.png",
-                "/Images/Koleksiyonlar/Gonca/3.png",
-                "/Images/Koleksiyonlar/Gonca/4.png",
-                "/Images/Koleksiyonlar/Gonca/5.png",
-                "/Images/Koleksiyonlar/Gonca/6.png",
-                "/Images/Koleksiyonlar/Gonca/7.png",
-                "/Images/Koleksiyonlar/Gonca/8.png",
-                "/Images/Koleksiyonlar/Gonca/9_highres.png",
-                "/Images/Koleksiyonlar/Gonca/10.png"
-            }
-                };
+                    "/Images/Koleksiyonlar/Sude/Sude.png",
+                    "/Images/Koleksiyonlar/Sude/2.png",
+                    "/Images/Koleksiyonlar/Sude/3.png"
+                }
+                    };
+                    break;
+
+                case 3:
+                    collection = new CollectionModel
+                    {
+                        Id = 3,
+                        Name = "Gonca Koleksiyonu",
+                        Description = "Gonca Koleksiyonu þýklýðýyla yaþam alanýnýza deðer katar...",
+                        CoverImage = "/Images/Koleksiyonlar/Gonca/Gonca.png",
+                        Images = new List<string>
+                {
+                    "/Images/Koleksiyonlar/Gonca/Gonca.png",
+                    "/Images/Koleksiyonlar/Gonca/2.png",
+                    "/Images/Koleksiyonlar/Gonca/3.png",
+                    "/Images/Koleksiyonlar/Gonca/4.png",
+                    "/Images/Koleksiyonlar/Gonca/5.png",
+                    "/Images/Koleksiyonlar/Gonca/6.png",
+                    "/Images/Koleksiyonlar/Gonca/7.png",
+                    "/Images/Koleksiyonlar/Gonca/8.png",
+                    "/Images/Koleksiyonlar/Gonca/9_highres.png",
+                    "/Images/Koleksiyonlar/Gonca/10.png"
+                }
+                    };
+                    break;
+
+                case 4:
+                    collection = new CollectionModel
+                    {
+                        Id = 4,
+                        Name = "Cemre Koleksiyonu",
+                        Description = "Minimal çizgiler",
+                        CoverImage = "/Images/Koleksiyonlar/Cemre/Cemre.png",
+                        Images = new List<string>
+                {
+                    "/Images/Koleksiyonlar/Cemre/Cemre.png",
+                    "/Images/Koleksiyonlar/Cemre/2.png",
+                    "/Images/Koleksiyonlar/Cemre/3.png"
+                }
+                    };
+                    break;
             }
 
             return View(collection);

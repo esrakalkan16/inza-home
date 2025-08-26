@@ -1,41 +1,40 @@
-﻿@{
-    ViewData["Title"] = "Ana Sayfa";
+﻿@model List<Inza_Home.Controllers.HomeController.CollectionModel>
 
-    var slides = new (string File, string Title, string Desc, int id)[] {
-        ("Gonca.png", "Gonca", "Zamansız, yumuşak hatlar", 1),
-        ("Beren.png", "Beren", "Modern ve konforlu", 2),
-        ("Sude.png",  "Sude",  "Sade & sıcak dokular", 3),
-        ("Cemre.png", "Cemre", "Minimal çizgiler", 4),
-    };
+@{
+    ViewData["Title"] = HelperFunctions.Translate("Anasayfa");
+
 }
+
 
 
 <section class="hero-wrap" style="margin-top: -80px; padding-top: 80px;">
     <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="6000">
         <div class="carousel-indicators">
-            @for (int i = 0; i < slides.Length; i++)
+            @for (int i = 0; i < Model.Count; i++)
             {
                 <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="@i"
-                        class="@(i==0?"active":"")" aria-current="@(i==0?"true":"false")" aria-label="Slide @(i+1)"></button>
+                        class="@(i==0?"active":"")"
+                        aria-current="@(i==0?"true":"false")"
+                        aria-label="Slide @(i+1)"></button>
             }
         </div>
 
         <div class="carousel-inner">
-            @for (int i = 0; i < slides.Length; i++)
+            @for (int i = 0; i < Model.Count; i++)
             {
-                var s = slides[i];
+                var s = Model[i];
                 <div class="carousel-item @(i==0?"active":"")">
-                    <img src="~/images/Koltuklar/@s.File" class="d-block w-100 hero-img zoom-img" alt="@s.Title">
+                    <img src="~/images/Koltuklar/@s.CoverImage" class="d-block w-100 hero-img zoom-img" alt="@HelperFunctions.Translate(s.Name)">
                     <div class="hero-overlay"></div>
 
                     <div class="carousel-caption d-md-block text-start caption-animate">
-                        <h2 class="hero-title fw-semibold text-white mb-3">@s.Title</h2>
-                        <p class="hero-desc text-white-50 mb-4">@s.Desc</p>
+                        <h2 class="hero-title fw-semibold text-white mb-3">@HelperFunctions.Translate(s.Name)</h2>
+                        <p class="hero-desc text-white-50 mb-4">@s.Description</p>
                         <div class="d-flex flex-column flex-md-row gap-3">
                             <span class="star-border-container">
                                 <span class="border-gradient-top"></span>
                                 <span class="border-gradient-bottom"></span>
-                                <a asp-controller="Home" asp-action="CollectionDetail" asp-route-id="@s.id"
+                                <a asp-controller="Home" asp-action="CollectionDetail" asp-route-id="@s.Id"
                                    class="btn btn-light rounded-pill px-4 py-3 fw-medium">@HelperFunctions.Translate("Detay")</a>
                             </span>
                             <span class="star-border-container">
@@ -71,11 +70,11 @@
                 <!-- Yazı -->
                 <div class="col-lg-6">
                     <div class="content-wrap">
-                        <h2 class="h2 fw-bold mb-3">Gonca @HelperFunctions.Translate("Koleksiyonu")</h2>
+                        <h2 class="h2 fw-bold mb-3">@HelperFunctions.Translate("Gonca Koleksiyonu")</h2>
                         <p class="text-muted mb-4">
                             @HelperFunctions.Translate("Gonca Koleksiyonu, zarif ve yumuşak hatlarıyla evinize sıcaklık katar. Doğal tonlar ve konforlu tasarımıyla, her yaşam alanına uyum sağlar. Minimalist detaylar, modern yaşamın ihtiyaçlarına cevap verirken, estetik bir dokunuş sunar.")
                         </p>
-                        <a href="#" class="btn btn-brown rounded-pill px-4">Koleksiyonu İncele</a>
+                        <a href="#" class="btn btn-brown rounded-pill px-4">@HelperFunctions.Translate("Koleksiyonu İncele")</a>
                     </div>
                 </div>
 
@@ -107,13 +106,11 @@
                 <!-- Yazı -->
                 <div class="col-lg-6">
                     <div class="content-wrap">
-                        <h2 class="h2 fw-bold mb-3">Beren Koleksiyonu</h2>
+                        <h2 class="h2 fw-bold mb-3">@HelperFunctions.Translate("Beren Koleksiyonu")</h2>
                         <p class="text-muted mb-4">
-                            Beren Koleksiyonu, modern yaşamın dinamik ruhunu yansıtır.
-                            Minimalist çizgileri, zarif detayları ve konforlu tasarımıyla hem estetik hem de işlevsellik ön plandadır.
-                            Evinizin her köşesine uyum sağlayan parçalar, yaşam alanlarınıza sofistike bir dokunuş katar.
+                            @HelperFunctions.Translate("Beren Koleksiyonu, modern yaşamın dinamik ruhunu yansıtır. Minimalist çizgileri, zarif detayları ve konforlu tasarımıyla hem estetik hem de işlevsellik ön plandadır. Evinizin her köşesine uyum sağlayan parçalar, yaşam alanlarınıza sofistike bir dokunuş katar.")
                         </p>
-                        <a href="#" class="btn btn-brown rounded-pill px-4">Koleksiyonu İncele</a>
+                        <a href="#" class="btn btn-brown rounded-pill px-4">@HelperFunctions.Translate("Koleksiyonu İncele")</a>
                     </div>
                 </div>
             </div>
@@ -127,13 +124,11 @@
                 <!-- Yazı -->
                 <div class="col-lg-6">
                     <div class="content-wrap">
-                        <h2 class="h2 fw-bold mb-3">Sude Koleksiyonu</h2>
+                        <h2 class="h2 fw-bold mb-3">@HelperFunctions.Translate("Sude Koleksiyonu")</h2>
                         <p class="text-muted mb-4">
-                            Sude Koleksiyonu, doğallığın huzurunu ve çağdaş tasarımın sadeliğini bir araya getiriyor.
-                            Ferah oturma düzenleri, yumuşak tonlar ve zarif detaylarla evinize sıcaklık katar.
-                            Konforlu yaşam için tasarlanan parçalar, hem günlük kullanımda hem de özel anlarda keyifli bir ortam oluşturur.
+                            @HelperFunctions.Translate("Sude Koleksiyonu, doğallığın huzurunu ve çağdaş tasarımın sadeliğini bir araya getiriyor. Ferah oturma düzenleri, yumuşak tonlar ve zarif detaylarla evinize sıcaklık katar. Konforlu yaşam için tasarlanan parçalar, hem günlük kullanımda hem de özel anlarda keyifli bir ortam oluşturur.")
                         </p>
-                        <a href="#" class="btn btn-brown rounded-pill px-4">Koleksiyonu İncele</a>
+                        <a href="#" class="btn btn-brown rounded-pill px-4">@HelperFunctions.Translate("Koleksiyonu İncele")</a>
                     </div>
                 </div>
 
@@ -154,8 +149,7 @@
 
 
 
-<button onclick="ChangeLanguages('TR');">TURKISH</button>
-<button onclick="ChangeLanguages('EN');">English</button>
+
 <!-- SIMPLE CTA SECTION -->
 <section class="py-5" style="background: white;">
     <div class="container py-5">
@@ -163,11 +157,11 @@
             <div class="col-lg-8">
                 <div class="fade-in-up">
                     <h2 class="display-6 fw-normal text-brown mb-4" style="font-family: 'Playfair Display', serif;">
-                        INZA HOME Hakkında Daha Fazla Bilgi Sahibi Olun
+                        @HelperFunctions.Translate("INZA HOME Hakkında Daha Fazla Bilgi Sahibi Olun")
                     </h2>
                     <div class="d-flex flex-column flex-md-row gap-3 justify-content-center mt-4">
                         <a asp-controller="Home" asp-action="AboutUs"
-                           class="btn btn-brown btn-lg rounded-pill px-5 py-3 fw-medium">Hakkımızda</a>
+                           class="btn btn-brown btn-lg rounded-pill px-5 py-3 fw-medium">@HelperFunctions.Translate("Hakkımızda")</a>
                        
                     </div>
                 </div>
@@ -182,10 +176,14 @@
 
     <div class="container position-relative" style="z-index:2; text-align:center;">
         <h1 class="creative-heading">
-            Modern <span class="highlight">çizgiler</span>, <em>zamansız</em> şıklık, <strong>gerçek</strong> huzur.
+            @HelperFunctions.Translate("Modern çizgiler"),
+            <span class="highlight">@HelperFunctions.Translate("zamansız zarafet")</span>,
+            <em>@HelperFunctions.Translate("gerçek huzur")</em>
         </h1>
         <p class="section-subtitle mt-4" style="color: #dfdad7;">
-            Sadece mobilya değil, yaşam alanınıza <strong>ruh</strong> katıyoruz.
+            @HelperFunctions.Translate("Sadece mobilya değil, yaşam alanınıza")
+            <strong>@HelperFunctions.Translate("ruh")</strong>
+            @HelperFunctions.Translate("katıyoruz.")
         </p>
     </div>
 </section>
