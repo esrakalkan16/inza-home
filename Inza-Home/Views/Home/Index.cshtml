@@ -35,13 +35,18 @@
                                 <span class="border-gradient-top"></span>
                                 <span class="border-gradient-bottom"></span>
                                 <a asp-controller="Home" asp-action="CollectionDetail" asp-route-id="@s.Id"
-                                   class="btn btn-light rounded-pill px-4 py-3 fw-medium">@HelperFunctions.Translate("Detay")</a>
+                                   class="btn btn-light  px-4 py-3 fw-medium">
+                                    @HelperFunctions.Translate("Detay")
+                                </a>
                             </span>
                             <span class="star-border-container">
                                 <span class="border-gradient-top"></span>
                                 <span class="border-gradient-bottom"></span>
+
                                 <a asp-controller="Home" asp-action="Collections"
-                                   class="btn btn-brown rounded-pill px-4 py-3 fw-medium">@HelperFunctions.Translate("Koleksiyonlar")</a>
+                                   class="btn btn-brown  px-4 py-3 fw-medium">
+                                    @HelperFunctions.Translate("Koleksiyonlar")
+                                </a>
                             </span>
                         </div>
                     </div>
@@ -74,7 +79,7 @@
                         <p class="text-muted mb-4">
                             @HelperFunctions.Translate("Gonca Koleksiyonu, zarif ve yumuşak hatlarıyla evinize sıcaklık katar. Doğal tonlar ve konforlu tasarımıyla, her yaşam alanına uyum sağlar. Minimalist detaylar, modern yaşamın ihtiyaçlarına cevap verirken, estetik bir dokunuş sunar.")
                         </p>
-                        <a href="#" class="btn btn-brown rounded-pill px-4">@HelperFunctions.Translate("Koleksiyonu İncele")</a>
+                        <a href="@Url.Action("Collections","Home")" class="btn btn-brown px-4">@HelperFunctions.Translate("Koleksiyonu İncele")</a>
                     </div>
                 </div>
 
@@ -110,7 +115,7 @@
                         <p class="text-muted mb-4">
                             @HelperFunctions.Translate("Beren Koleksiyonu, modern yaşamın dinamik ruhunu yansıtır. Minimalist çizgileri, zarif detayları ve konforlu tasarımıyla hem estetik hem de işlevsellik ön plandadır. Evinizin her köşesine uyum sağlayan parçalar, yaşam alanlarınıza sofistike bir dokunuş katar.")
                         </p>
-                        <a href="#" class="btn btn-brown rounded-pill px-4">@HelperFunctions.Translate("Koleksiyonu İncele")</a>
+                        <a href="@Url.Action("Collections","Home")" class="btn btn-brown px-4">@HelperFunctions.Translate("Koleksiyonu İncele")</a>
                     </div>
                 </div>
             </div>
@@ -128,7 +133,7 @@
                         <p class="text-muted mb-4">
                             @HelperFunctions.Translate("Sude Koleksiyonu, doğallığın huzurunu ve çağdaş tasarımın sadeliğini bir araya getiriyor. Ferah oturma düzenleri, yumuşak tonlar ve zarif detaylarla evinize sıcaklık katar. Konforlu yaşam için tasarlanan parçalar, hem günlük kullanımda hem de özel anlarda keyifli bir ortam oluşturur.")
                         </p>
-                        <a href="#" class="btn btn-brown rounded-pill px-4">@HelperFunctions.Translate("Koleksiyonu İncele")</a>
+                        <a href="@Url.Action("Collections","Home")" class="btn btn-brown px-4">@HelperFunctions.Translate("Koleksiyonu İncele")</a>
                     </div>
                 </div>
 
@@ -151,7 +156,7 @@
 
 
 <!-- SIMPLE CTA SECTION -->
-<section class="py-5" style="background: white;">
+<section class="py-5" style="background: #f1f1f1;">
     <div class="container py-5">
         <div class="row justify-content-center text-center">
             <div class="col-lg-8">
