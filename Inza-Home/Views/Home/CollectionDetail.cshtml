@@ -1,6 +1,7 @@
 ﻿@model Inza_Home.Controllers.HomeController.CollectionModel
 @{
     ViewData["Title"] = Model.Name;
+    ViewBag.HideSiteMap = true;
 }
 
 <div class="collection-detail-page">
@@ -70,7 +71,7 @@
                         <div class="title-underline"></div>
                     </div>
 
-                    <div class="collection-content" style="padding: 10px;">
+                    <div class="collection-content" style="padding: 30px;">
                         <p class="description">@HelperFunctions.Translate(Model.Description)</p>
 
                         <!-- Features -->
@@ -129,7 +130,7 @@
                 </span>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
             </div>
-            <div class="modal-body d-flex align-items-center justify-content-center position-relative p-0">
+            <div class="modal-body d-flex align-items-center justify-content-center position-relative p-0 " >
                 <!-- Sol Navigasyon Oku -->
                 <button class="modal-nav-arrow modal-nav-left" id="modalPrev">
                     <i class="bi bi-chevron-left"></i>
@@ -145,16 +146,7 @@
                     <i class="bi bi-chevron-right"></i>
                 </button>
 
-                <!-- Alt Thumbnail Navigasyon -->
-                <div class="modal-thumbnails">
-                    <div class="modal-thumbnails-container">
-                        @for (int i = 0; i < Model.Images.Count; i++)
-                        {
-                            <div class="modal-thumbnail @(i == 0 ? "active" : "")" data-index="@i">
-                                <img src="@Model.Images[i]" alt="@Model.Name @(i + 1)" loading="lazy">
-                            </div>
-                        }
-                    </div>
+       
                 </div>
             </div>
         </div>

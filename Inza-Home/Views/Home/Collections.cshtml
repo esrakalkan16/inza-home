@@ -21,11 +21,8 @@
                             <div class="collection-card">
                                 <div class="image-container">
                                     <img src="@item.CoverImage" alt="@item.Name" class="collection-image" />
-                                    <div class="image-overlay">
-                                        <div class="overlay-content">
-                                            <h3 class="collection-name-overlay">@item.Name</h3>
-                                            <span class="view-text">@HelperFunctions.Translate("Koleksiyonu İncele")</span>
-                                        </div>
+                                    <div class="overlay-content">                        
+                                        <span class="view-button">@HelperFunctions.Translate("Koleksiyonu İncele")</span>
                                     </div>
                                 </div>
                             </div>
@@ -47,7 +44,6 @@
     /* Sadece Başlık */
     .collections-header {
         padding: 50px 0 50px;
-        border-bottom: 1px solid rgba(142, 135, 121, 0.3);
         margin-bottom: 60px;
     }
 
@@ -56,7 +52,7 @@
         font-weight: 600;
         color: #8e8779;
         margin: 0;
-        text-align: left; /* solda */
+        text-align: left;
         letter-spacing: -0.02em;
     }
 
@@ -84,6 +80,8 @@
         box-shadow: 0 4px 20px rgba(139,115,85,.15);
         transition: all .4s ease;
         height: 100%;
+        display: flex;
+        flex-direction: column;
     }
 
         .collection-card:hover {
@@ -104,72 +102,84 @@
         height: 100%;
         object-fit: cover;
         object-position: center;
-        transition: transform .6s ease;
+        transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         display: block;
     }
 
     .collection-card:hover .collection-image {
-        transform: scale(1.03);
+        transform: scale(1.1);
     }
 
-    /* Overlay */
-    .image-overlay {
+    /* Overlay İçeriği (Yeni) */
+    .overlay-content {
         position: absolute;
         inset: 0;
-        background: rgba(139,115,85,.85);
         display: flex;
+        flex-direction: column;
         align-items: center;
         justify-content: center;
+        gap: 10px;
         opacity: 0;
-        transition: opacity .4s ease;
+        transition: opacity 0.4s ease;
+        text-align: center;
     }
 
-    .collection-card:hover .image-overlay {
+    .collection-card:hover .overlay-content {
         opacity: 1;
     }
 
-    .overlay-content {
-        text-align: center;
-        color: #fdfcfa;
+    .collection-name-overlay {
+        color: #fff;
+        font-size: 1.2rem;
+        font-weight: 600;
+        margin: 0;
+        transform: translateY(-10px);
+        transition: transform 0.4s ease;
     }
 
-    .view-text {
-        font-size: 1.1rem;
+    .collection-card:hover .collection-name-overlay {
+        transform: translateY(0);
+    }
+
+    .view-button {
+        font-size: 0.9rem;
         text-transform: uppercase;
         letter-spacing: 1px;
-        padding: 12px 24px;
-        border: 2px solid #fdfcfa;
+        padding: 8px 16px;
+        border: 1px solid #fff;
+        color: #fff;
+        background-color: #78706482;
         display: inline-block;
-        transition: all .3s ease;
+        transition: all 0.3s ease;
+        transform: translateY(10px);
     }
 
-        .view-text:hover {
-            background: #fdfcfa;
-            color: #8b7355;
-        }
+    .collection-card:hover .view-button {
+        transform: translateY(0);
+    }
+
+    .view-button:hover {
+        background: #ddd3d3;
+        color: #8b7355;
+    }
 
     /* Responsive */
     @@media (max-width: 992px) {
-        .collections-grid
-
-    {
-        grid-template-columns: repeat(2, minmax(250px,1fr));
-        gap: 28px;
+        .collections-grid {
+            grid-template-columns: repeat(2, minmax(250px, 1fr));
+            gap: 28px;
+        }
     }
 
-    }
     @@media (max-width: 576px) {
-        .collections-grid
+        .collections-grid {
+            grid-template-columns: 1fr;
+            gap: 22px;
+            padding: 0 15px;
+        }
 
-    {
-        grid-template-columns: 1fr;
-        gap: 22px;
-        padding: 0 15px;
-    }
-
-    .collections-title {
-        font-size: 1.6rem;
-    }
-
+        .collections-title {
+            font-size: 1.6rem;
+        }
     }
 </style>

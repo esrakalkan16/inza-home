@@ -17,10 +17,10 @@ namespace Inza_Home.Controllers
         {
             var slides = new List<CollectionModel>
     {
-        new CollectionModel { Id = 3, Name = "Gonca", Description = HelperFunctions.Translate("Zamansýz, yumuþak hatlar"), CoverImage = "Gonca.png" },
-        new CollectionModel { Id = 1, Name = "Beren", Description = HelperFunctions.Translate("Modern ve konforlu"), CoverImage = "Beren.png" },
-        new CollectionModel { Id = 2, Name = "Sude",  Description = HelperFunctions.Translate("Sade & sýcak dokular"), CoverImage = "Sude.png" },
-        new CollectionModel { Id = 4, Name = "Cemre", Description = HelperFunctions.Translate("Minimal çizgiler"), CoverImage = "Cemre.png" }
+        new CollectionModel { Id = 3, Name = "Gonca", Description = HelperFunctions.Translate("Gonca Koleksiyonu, zarif ve yumuþak hatlarýyla yaþam alanlarýnýza sýcaklýk katar. Doðal tonlarý ve þýk detaylarýyla modern evlere uyum saðlar, zamansýz tasarýmýyla her döneme eþlik eder."), CoverImage = "Gonca.png" },
+        new CollectionModel { Id = 1, Name = "Beren", Description = HelperFunctions.Translate("Beren Koleksiyonu, modern yaþamýn enerjisini ve konforunu bir araya getirir. Minimal çizgileri ve iþlevsel tasarýmýyla evinizin her köþesine sofistike bir dokunuþ ekler."), CoverImage = "Beren.png" },
+        new CollectionModel { Id = 2, Name = "Sude",  Description = HelperFunctions.Translate("Sude Koleksiyonu, doðallýðýn huzurunu sade tasarýmlarla buluþturur. Ferah oturma düzenleri ve yumuþak dokularýyla günlük yaþamýnýza sýcak bir atmosfer kazandýrýr."), CoverImage = "Sude.png" },
+        new CollectionModel { Id = 4, Name = "Cemre", Description = HelperFunctions.Translate("Cemre Koleksiyonu, minimal çizgileriyle þýklýðý ön plana çýkarýr. Yalýn formlarý ve modern duruþuyla yaþam alanlarýnýza ferah ve dengeli bir hava katar."), CoverImage = "Cemre.png" }
     };
 
             return View(slides);

@@ -9,12 +9,12 @@
             <!-- İletişim Bilgileri -->
             <div class="col-lg-5" >
                 <div class="info-card">
-                    <h3 class="card-title">İletişim Bilgilerimiz</h3>
+                    <h3 class="card-title">@HelperFunctions.Translate("İletişim Bilgilerimiz")</h3>
 
                     <div class="info-item">
                         <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
                         <div>
-                            <h5>Adres</h5>
+                            <h5>@HelperFunctions.Translate("Adres")</h5>
                             <p>Vakıf Mah. Vakıfköy Cad. No:98/6<br>Yıldırım / BURSA</p>
                         </div>
                     </div>
@@ -22,16 +22,16 @@
                     <div class="info-item">
                         <div class="info-icon"><i class="fas fa-phone"></i></div>
                         <div>
-                            <h5>Telefon</h5>
-                            <p>0533 792 48 60<br>Pazartesi - Cumartesi, 09:00 - 18:00</p>
+                            <h5>@HelperFunctions.Translate("Telefon")</h5>
+                            <p>0533 792 48 60<br>@HelperFunctions.Translate("Pazartesi - Cumartesi, 09:00 - 18:00")</p>
                         </div>
                     </div>
 
                     <div class="info-item">
                         <div class="info-icon"><i class="fas fa-envelope"></i></div>
                         <div>
-                            <h5>E-Posta</h5>
-                            <p>info@inzahome.com<br>24 saat içinde yanıtlıyoruz</p>
+                            <h5>@HelperFunctions.Translate("E-Posta")</h5>
+                            <p>info@inzahome.com<br>@HelperFunctions.Translate("24 saat içinde yanıtlıyoruz")</p>
                         </div>
                     </div>
                 </div>
@@ -40,27 +40,27 @@
             <!-- Form -->
             <div class="col-lg-7">
                 <div class="info-card">
-                    <h3 class="card-title">Bize Yazın</h3>
+                    <h3 class="card-title">@HelperFunctions.Translate("Bize Yazın")</h3>
                     <form action="@Url.Action("ContactForm","Home")" method="post" class="contact-form">
                         <div class="row g-3">
                             <div class="col-md-6">
-                                <label class="form-label">Ad Soyad *</label>
+                                <label class="form-label">@HelperFunctions.Translate("Ad Soyad") *</label>
                                 <input type="text" name="FullName" class="form-input" required>
                             </div>
                             <div class="col-md-6">
-                                <label class="form-label">Telefon *</label>
+                                <label class="form-label">@HelperFunctions.Translate("Telefon") *</label>
                                 <input type="tel" name="Phone" class="form-input" required>
                             </div>
                             <div class="col-12">
-                                <label class="form-label">E-Mail Adresiniz *</label>
+                                <label class="form-label">@HelperFunctions.Translate("E-Mail Adresiniz") *</label>
                                 <input type="email" name="Email" class="form-input" required>
                             </div>
                             <div class="col-12">
-                                <label class="form-label">Mesajınız *</label>
+                                <label class="form-label">@HelperFunctions.Translate("Mesajınız") *</label>
                                 <textarea name="Message" rows="5" class="form-textarea" required></textarea>
                             </div>
                             <div class="col-12">
-                                <button type="submit" class="submit-btn">Gönder</button>
+                                <button type="submit" class="submit-btn">@HelperFunctions.Translate("Gönder")</button>
                             </div>
                         </div>
                     </form>
@@ -80,7 +80,7 @@
 
 <style>
     .contact-section {
-        padding: 80px 0;
+        padding: 80px 11px;
     }
 
     .info-card {
