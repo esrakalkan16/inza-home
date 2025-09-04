@@ -16,7 +16,10 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullpage.js@4/dist/fullpage.min.css" />
     <link href="~/css/site.css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/turn.js/4/turn.min.css" />
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/turn.js/4/turn.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
     <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
@@ -59,7 +62,11 @@
                                 @HelperFunctions.Translate("İletişim")
                             </a>
                         </li>
-
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("Catalog","Home")" onclick="setActive(this)">
+                                @HelperFunctions.Translate("Katalog")
+                            </a>
+                        </li>
                         <!-- Dil Değiştirme artık aynı ul içinde -->
                         <li class="nav-item dropdown">
                             <button class="btn btn-link nav-link dropdown-toggle d-flex align-items-center text-decoration-none border-0 bg-transparent p-1"

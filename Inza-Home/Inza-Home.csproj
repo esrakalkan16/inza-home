@@ -8,6 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\images\Koleksiyonlar\**" />
+    <Content Remove="wwwroot\images\Koleksiyonlar\**" />
+    <EmbeddedResource Remove="wwwroot\images\Koleksiyonlar\**" />
+    <None Remove="wwwroot\images\Koleksiyonlar\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="wwwroot\Languages\TRANSLATE_EN.txt" />
   </ItemGroup>
 

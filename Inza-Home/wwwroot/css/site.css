@@ -2339,3 +2339,23 @@ h1, h2, .display-1, .display-2 {
         font-size: 14px;
     }
 }
+
+
+/*----------Katalog-------------*/
+
+.catalog-container {
+    display: flex;
+    justify-content: center;
+    margin: 100px auto;
+}
+
+#flipbook {
+    width: 1400px;
+    height: 700px;
+    margin: 0 auto;
+}
+
+    #flipbook .page {
+        background: #fff;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
