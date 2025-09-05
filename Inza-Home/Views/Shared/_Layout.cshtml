@@ -1,6 +1,7 @@
 ﻿@{
     Layout = null;
     string ctrl = (ViewContext.RouteData.Values["controller"]?.ToString() ?? "").ToLower();
+    string act = (ViewContext.RouteData.Values["action"]?.ToString() ?? "").ToLower();
     var LANG = SessionHelper.GetSessionValue("LANG") ?? "TR";
 }
 <!doctype html>
@@ -10,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>@ViewData["Title"] - Inza Home</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">//-
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullpage.js@4/dist/fullpage.min.css" />
@@ -43,27 +44,32 @@
                 <div class="collapse navbar-collapse" id="mainNav">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0 small">
                         <li class="nav-item">
-                            <a class="nav-link active" href="@Url.Action("Index","Home")" onclick="setActive(this)">
+                            <a class="nav-link @(ctrl=="home" && act=="index" ? "active" : "")"
+                               href="@Url.Action("Index","Home")">
                                 @HelperFunctions.Translate("Anasayfa")
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" href="@Url.Action("Collections","Home")" onclick="setActive(this)">
+                            <a class="nav-link @(ctrl=="home" && act=="collections" ? "active" : "")"
+                               href="@Url.Action("Collections","Home")">
                                 @HelperFunctions.Translate("Koleksiyonlar")
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="@Url.Action("AboutUs","Home")" onclick="setActive(this)">
+                            <a class="nav-link @(ctrl=="home" && act=="aboutus" ? "active" : "")"
+                               href="@Url.Action("AboutUs","Home")">
                                 @HelperFunctions.Translate("Hakkımızda")
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="@Url.Action("Contact","Home")" onclick="setActive(this)">
+                            <a class="nav-link @(ctrl=="home" && act=="contact" ? "active" : "")"
+                               href="@Url.Action("Contact","Home")">
                                 @HelperFunctions.Translate("İletişim")
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="@Url.Action("Catalog","Home")" onclick="setActive(this)">
+                            <a class="nav-link @(ctrl=="home" && act=="catalog" ? "active" : "")"
+                               href="@Url.Action("Catalog","Home")">
                                 @HelperFunctions.Translate("Katalog")
                             </a>
                         </li>
@@ -162,6 +168,7 @@
                             <li><a class="text-white-75 text-decoration-none" href="@Url.Action("Collections","Home")">@HelperFunctions.Translate("Koleksiyonlar")</a></li>
                             <li><a class="text-white-75 text-decoration-none" href="@Url.Action("AboutUs","Home")">@HelperFunctions.Translate("Hakkımızda")</a></li>
                             <li><a class="text-white-75 text-decoration-none" href="@Url.Action("Contact","Home")">@HelperFunctions.Translate("İletişim")</a></li>
+                            <li><a class="text-white-75 text-decoration-none" href="@Url.Action("Catalog","Home")">@HelperFunctions.Translate("Katalog")</a></li>
                         </ul>
                     </div>
 
@@ -254,8 +261,10 @@
         }
 
         function ChangeLanguages(LANG){
-            location.href = '/Home/ChangeLanguages?LANG='+LANG;
+                  let currentUrl = window.location.pathname + window.location.search;
+        window.location.href = '/Home/ChangeLanguages?LANG=' + LANG + '&returnUrl=' + encodeURIComponent(currentUrl);
         }
+
     </script>
 
 </body>

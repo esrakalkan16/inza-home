@@ -998,11 +998,11 @@ h1, h2, .display-1, .display-2 {
 }
 
 .hero-desc {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     line-height: 1.8;
     text-align: justify;
     text-justify: inter-word;
-    max-width: 800px;
+    max-width: 600px;
     margin: 0 auto;
 }
 

@@ -1,4 +1,4 @@
-﻿@model Inza_Home.Controllers.HomeController.CollectionModel
+﻿    @model Inza_Home.Controllers.HomeController.CollectionModel
 @{
     ViewData["Title"] = Model.Name;
     ViewBag.HideSiteMap = true;
@@ -215,8 +215,8 @@
 
                 document.getElementById('downloadBtn').addEventListener('click', () => {
                     const link = document.createElement('a');
-                    link.href = '/images/content.pdf';
-                    link.download = 'content.pdf'
+                    link.href = '/images/InzaHome2025.pdf';
+                    link.download = 'InzaHome.pdf'
                     document.body.appendChild(link);
                     link.click();
                     document.body.removeChild(link);

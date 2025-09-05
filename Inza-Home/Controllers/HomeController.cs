@@ -56,9 +56,16 @@ namespace Inza_Home.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-        public IActionResult ChangeLanguages(string LANG)
+        public IActionResult ChangeLanguages(string LANG,string returnUrl)
         {
-            SessionHelper.SetSessionValue("LANG", LANG);    
+            SessionHelper.SetSessionValue("LANG", LANG);
+
+            if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
+            {
+                return Redirect(returnUrl);
+            }
+
+            // yoksa anasayfa
             return RedirectToAction("Index", "Home");
         }
         public static class CollectionRepository
@@ -68,7 +75,7 @@ namespace Inza_Home.Controllers
         new CollectionModel
         {
             Id = 1,
-            Name = "Asya Koleksiyonu",
+            Name = "Asya",
             Description = HelperFunctions.Translate("Asya Koleksiyonu, doðu kültürünün estetik inceliklerini modern yaþam alanlarýna taþýr. Sade formlarý ve zarif dokularý ile evinize huzur ve sofistike bir atmosfer katar."),
             CoverImage = "/Images/Koleksiyonlar-2/Asya/Asya.jpg",
             Images = new List<string>
@@ -86,7 +93,7 @@ namespace Inza_Home.Controllers
         new CollectionModel
         {
             Id = 2,
-            Name = "Beren Koleksiyonu",
+            Name = "Beren",
             Description = HelperFunctions.Translate("Beren Koleksiyonu, modern yaþamýn enerjisini ve konforunu bir araya getirir. Minimal çizgileri ve iþlevsel tasarýmýyla evinizin her köþesine sofistike bir dokunuþ ekler."),
             CoverImage = "/Images/Koleksiyonlar-2/Beren/Beren.jpg",
             Images = new List<string>
@@ -110,7 +117,7 @@ namespace Inza_Home.Controllers
         new CollectionModel
         {
             Id = 3,
-            Name = "Cemre Koleksiyonu",
+            Name = "Cemre",
             Description = HelperFunctions.Translate("Cemre Koleksiyonu, yalýn çizgileriyle þýklýðý ön plana çýkarýr. Ferah tasarýmýyla yaþam alanlarýnýza modern ve dengeli bir görünüm kazandýrýr."),
             CoverImage = "/Images/Koleksiyonlar-2/Cemre/Cemre.jpg",
             Images = new List<string>
@@ -133,25 +140,25 @@ namespace Inza_Home.Controllers
         new CollectionModel
         {
             Id = 4,
-            Name = "Cemre2 Koleksiyonu",
+            Name = "Cemre2",
             Description = HelperFunctions.Translate("Cemre2 Koleksiyonu, özgün detaylarýyla klasik ve modern tasarýmý birleþtirir. Rahatlýðý ön planda tutan yapýsýyla estetik ve iþlevselliði ayný anda sunar."),
-            CoverImage = "/Images/Koleksiyonlar-2/Cemre2/Cemre2.png",
+            CoverImage = "/Images/Koleksiyonlar-2/Cemre2/Cemre2.jpg",
             Images = new List<string>
             {
-                "/Images/Koleksiyonlar-2/Cemre2/Cemre2.png",
-                "/Images/Koleksiyonlar-2/Cemre2/2.png",
-                "/Images/Koleksiyonlar-2/Cemre2/3.png",
-                "/Images/Koleksiyonlar-2/Cemre2/4.png",
-                "/Images/Koleksiyonlar-2/Cemre2/5.png",
-                "/Images/Koleksiyonlar-2/Cemre2/6.png",
-                "/Images/Koleksiyonlar-2/Cemre2/7.png",
-                "/Images/Koleksiyonlar-2/Cemre2/8.png"
+                "/Images/Koleksiyonlar-2/Cemre2/Cemre2.jpg",
+                "/Images/Koleksiyonlar-2/Cemre2/2.jpg",
+                "/Images/Koleksiyonlar-2/Cemre2/3.jpg",
+                "/Images/Koleksiyonlar-2/Cemre2/4.jpg",
+                "/Images/Koleksiyonlar-2/Cemre2/5.jpg",
+                "/Images/Koleksiyonlar-2/Cemre2/6.jpg",
+                "/Images/Koleksiyonlar-2/Cemre2/7.jpg",
+                "/Images/Koleksiyonlar-2/Cemre2/8.jpg"
             }
         },
         new CollectionModel
         {
             Id = 5,
-            Name = "Ceren Koleksiyonu",
+            Name = "Ceren",
             Description = HelperFunctions.Translate("Ceren Koleksiyonu, sýcak tonlarý ve zarif hatlarýyla yaþam alanlarýnýza doðal bir þýklýk getirir. Yumuþak dokularýyla evinizde samimi ve huzurlu bir ortam oluþturur."),
             CoverImage = "/Images/Koleksiyonlar-2/Ceren/Ceren.jpg",
             Images = new List<string>
@@ -171,7 +178,7 @@ namespace Inza_Home.Controllers
         new CollectionModel
         {
             Id = 6,
-            Name = "Defne Koleksiyonu",
+            Name = "Defne",
             Description = HelperFunctions.Translate("Defne Koleksiyonu, doðallýðý ve zarafeti bir arada sunar. Ýnce detaylarý ve modern tasarýmýyla evinizin ruhuna taze bir dokunuþ katar."),
             CoverImage = "/Images/Koleksiyonlar-2/Defne/Defne.jpg",
             Images = new List<string>
@@ -191,7 +198,7 @@ namespace Inza_Home.Controllers
         new CollectionModel
         {
             Id = 7,
-            Name = "Elif Koleksiyonu",
+            Name = "Elif",
             Description = HelperFunctions.Translate("Elif Koleksiyonu, yalýn estetiði ve fonksiyonel tasarýmýyla modern yaþam alanlarýna uyum saðlar. Rahat dokusu ve zamansýz formuyla her ortama deðer katar."),
             CoverImage = "/Images/Koleksiyonlar-2/Elif/Elif.jpg",
             Images = new List<string>
@@ -207,7 +214,7 @@ namespace Inza_Home.Controllers
         new CollectionModel
         {
             Id = 8,
-            Name = "Gonca Koleksiyonu",
+            Name = "Gonca",
             Description = HelperFunctions.Translate("Gonca Koleksiyonu, zarif ve yumuþak hatlarýyla yaþam alanlarýnýza sýcaklýk katar. Doðal tonlarý ve þýk detaylarýyla modern evlere uyum saðlar, zamansýz tasarýmýyla her döneme eþlik eder."),
             CoverImage = "/Images/Koleksiyonlar-2/Gonca/Gonca.jpg",
             Images = new List<string>
@@ -226,7 +233,7 @@ namespace Inza_Home.Controllers
         new CollectionModel
         {
             Id = 9,
-            Name = "Madrid Koleksiyonu",
+            Name = "Madrid",
             Description = HelperFunctions.Translate("Madrid Koleksiyonu, Avrupa esintilerini modern yorumlarla birleþtirir. Þýk ve estetik detaylarýyla evinizde sofistike bir atmosfer oluþturur."),
             CoverImage = "/Images/Koleksiyonlar-2/Madrid/Madrid.jpg",
             Images = new List<string>
@@ -245,7 +252,7 @@ namespace Inza_Home.Controllers
         new CollectionModel
         {
             Id = 10,
-            Name = "Polo Koleksiyonu",
+            Name = "Polo",
             Description = HelperFunctions.Translate("Polo Koleksiyonu, güçlü çizgileri ve modern tarzýyla dikkat çeker. Konforlu oturma düzenleri ve dengeli formu ile þýklýk ve iþlevselliði bir arada sunar."),
             CoverImage = "/Images/Koleksiyonlar-2/Polo/Polo.jpg",
             Images = new List<string>
@@ -266,7 +273,7 @@ namespace Inza_Home.Controllers
         new CollectionModel
         {
             Id = 11,
-            Name = "Sude Koleksiyonu",
+            Name = "Sude",
             Description = HelperFunctions.Translate("Sude Koleksiyonu, doðallýðýn huzurunu sade tasarýmlarla buluþturur. Ferah oturma düzenleri ve yumuþak dokularýyla günlük yaþamýnýza sýcak bir atmosfer kazandýrýr."),
             CoverImage = "/Images/Koleksiyonlar-2/Sude/Sude.jpg",
             Images = new List<string>
@@ -290,7 +297,7 @@ namespace Inza_Home.Controllers
         new CollectionModel
         {
             Id = 12,
-            Name = "Venedik Koleksiyonu",
+            Name = "Venedik",
             Description = HelperFunctions.Translate("Venedik Koleksiyonu, klasik Avrupa zarafetini modern yaþam alanlarýna taþýr. Ýhtiþamlý detaylarý ve sofistike havasýyla evinizde prestijli bir ambiyans yaratýr."),
             CoverImage = "/Images/Koleksiyonlar-2/Venedik/Venedik.jpg",
             Images = new List<string>

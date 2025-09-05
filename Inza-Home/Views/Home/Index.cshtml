@@ -24,7 +24,7 @@
             {
                 var s = Model[i];
                 <div class="carousel-item @(i==0?"active":"")">
-                    <img src="~/images/Koltuklar/@s.CoverImage" class="d-block w-100 hero-img zoom-img" alt="@HelperFunctions.Translate(s.Name)">
+                    <img src="@s.CoverImage" class="d-block w-100 hero-img zoom-img" alt="@HelperFunctions.Translate(s.Name)">
                     <div class="hero-overlay"></div>
 
                     <div class="carousel-caption d-md-block text-start caption-animate">
@@ -86,7 +86,7 @@
                 <!-- Görsel -->
                 <div class="col-lg-6">
                     <div class="image-box shadow-lg">
-                        <img src="~/images/Koltuklar/Gonca.png"
+                        <img src="~/images/Koleksiyonlar-2/Gonca/Gonca.jpg"
                              alt="Gonca Koleksiyonu"
                              class="img-fluid rounded-4">
                     </div>
@@ -102,7 +102,7 @@
                 <!-- Görsel -->
                 <div class="col-lg-6">
                     <div class="image-box shadow-lg">
-                        <img src="~/images/Koltuklar/Beren.png"
+                        <img src="~/images/Koleksiyonlar-2/Beren/Beren.jpg"
                              alt="Beren Koleksiyonu"
                              class="img-fluid rounded-4">
                     </div>
@@ -140,7 +140,7 @@
                 <!-- Görsel -->
                 <div class="col-lg-6">
                     <div class="image-box shadow-lg">
-                        <img src="~/images/Koltuklar/Sude.png"
+                        <img src="~/images/Koleksiyonlar-2/Sude/Sude.jpg"
                              alt="Sude Koleksiyonu"
                              class="img-fluid rounded-4">
                     </div>
@@ -158,11 +158,11 @@
             <div class="col-lg-8">
                 <div class="fade-in-up">
                     <h2 class="display-6 fw-normal text-brown mb-4" style="font-family: 'Playfair Display', serif;">
-                        @HelperFunctions.Translate("INZA HOME Hakkında Daha Fazla Bilgi Sahibi Olun")
+                        @HelperFunctions.Translate("Koleksiyonlar Hakkında Daha Fazla Bilgi Sahibi Olun")
                     </h2>
                     <div class="d-flex flex-column flex-md-row gap-3 justify-content-center mt-4">
-                        <a asp-controller="Home" asp-action="AboutUs"
-                           class="btn btn-brown btn-lg  px-5 py-3 fw-medium" style="border-radius:8px">@HelperFunctions.Translate("Hakkımızda")</a>
+                        <a asp-controller="Home" asp-action="COllections"
+                           class="btn btn-brown btn-lg  px-5 py-3 fw-medium" style="border-radius:8px">@HelperFunctions.Translate("Koleksiyonlar")</a>
                        
                     </div>
                 </div>

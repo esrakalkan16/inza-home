@@ -1,4 +1,5 @@
-﻿@{
+﻿
+@{
     ViewData["Title"] = "INZA HOME Katalog";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -54,7 +55,8 @@
         box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
         border-radius: 15px;
         overflow: hidden;
-        background: rgb(67 55 38);
+        background: rgb(143 135 122 / 59%);
+        ;
     }
 
         #flipbook .page {
@@ -199,6 +201,7 @@
     @@media (max-width: 600px) {
         #flipbook {
             transform: scale(0.5);
+            height: 500px !important;
         }
 
         .header-section {
@@ -250,21 +253,22 @@
     .control-btn:hover::before {
         left: 100%;
     }
+
 </style>
 
 
 <!-- Header Section -->
 <section class="header-section section">
     <h1>İNZA HOME</h1>
-    <p>2025 Katalog Koleksiyonu</p>
+    <p>@HelperFunctions.Translate("2025 Katalog Koleksiyonu")</p>
 </section>
 
 <!-- Loading Section -->
 <section class="loading-section section" id="loading" style="color: #2d1e0a78;">
     <div class="loading-spinner"></div>
     <div class="loading-text">
-        <p>Katalog yükleniyor...</p>
-        <small>Lütfen bekleyiniz</small>
+        <p>@HelperFunctions.Translate("Katalog yükleniyor...")</p>
+        <small>@HelperFunctions.Translate("Lütfen bekleyiniz")</small>
     </div>
 </section>
 
@@ -276,7 +280,7 @@
 
 <section class="page-info-section section" id="pageInfo">
     <div class="page-info-wrapper">
-        <span>Sayfa:</span>
+        <span>@HelperFunctions.Translate("Sayfa"):</span>
         <span class="page-current" id="currentPage">1</span>
         <span>/</span>
         <span id="totalPages">1</span>
@@ -294,9 +298,34 @@
     let flipbookInstance;
     let totalPagesCount = 0;
 
-    // PDF yolu - buraya kendi PDF dosyanızın yolunu yazın
-    const pdfUrl = '/pdfs/InzaHome2025.pdf'; // Örnek PDF
+    const pdfUrl = '/pdfs/InzaHome2025.pdf';
 
+    // Flipbook init fonksiyonu
+    function initFlipbook(containerWidth, containerHeight) {
+        // Ekran genişliğine göre tek/çift sayfa
+        const displayMode = window.innerWidth <= 600 ? 'single' : 'double';
+
+        $("#flipbook").turn({
+            width: containerWidth,
+            height: containerHeight,
+            autoCenter: true,
+            display: displayMode,
+            acceleration: true,
+            gradients: true,
+            elevation: 50,
+            duration: 1200,
+            when: {
+                turned: function (event, page) {
+                    document.getElementById('currentPage').textContent = page;
+                    updatePageInfo();
+                }
+            }
+        });
+
+        flipbookInstance = $("#flipbook");
+    }
+
+    // PDF yükleme
     function loadPDF() {
         const flipbook = document.getElementById('flipbook');
 
@@ -309,8 +338,7 @@
             for (let i = 1; i <= totalPagesCount; i++) {
                 renderPromises.push(
                     pdf.getPage(i).then(page => {
-                        // Sayfayı daha yüksek kalitede render et
-                        let scale = 2.5; // Kaliteyi artırdık
+                        let scale = 2.5;
                         let viewport = page.getViewport({ scale });
 
                         let canvas = document.createElement("canvas");
@@ -335,29 +363,11 @@
                 // Tüm sayfaları flipbook içine ekle
                 pages.forEach(page => flipbook.appendChild(page));
 
-                // Flipbook boyutlarını hesapla - GENİŞLİĞİ ARTIRDIK
-                const containerWidth = Math.min(1400, window.innerWidth - 60); // 1000'den 1400'e çıkardık
-                const containerHeight = Math.min(800, window.innerHeight - 200); // 700'den 800'e çıkardık
+                const containerWidth = Math.min(1400, window.innerWidth - 60);
+                const containerHeight = Math.min(800, window.innerHeight - 200);
 
-                // Turn.js'yi başlat
-                $("#flipbook").turn({
-                    width: containerWidth,
-                    height: containerHeight,
-                    autoCenter: true,
-                    display: 'double',
-                    acceleration: true,
-                    gradients: true,
-                    elevation: 50,
-                    duration: 1200, // Animasyon süresini artırdık
-                    when: {
-                        turned: function(event, page) {
-                            document.getElementById('currentPage').textContent = page;
-                            updatePageInfo();
-                        }
-                    }
-                });
-
-                flipbookInstance = $("#flipbook");
+                // ✅ responsive init
+                initFlipbook(containerWidth, containerHeight);
 
                 // Loading'i gizle, kataloğu göster
                 setTimeout(() => {
@@ -383,31 +393,23 @@
 
     // Kontrol fonksiyonları
     function previousPage() {
-        if (flipbookInstance) {
-            flipbookInstance.turn("previous");
-        }
+        if (flipbookInstance) flipbookInstance.turn("previous");
     }
 
     function nextPage() {
-        if (flipbookInstance) {
-            flipbookInstance.turn("next");
-        }
+        if (flipbookInstance) flipbookInstance.turn("next");
     }
 
     function goToFirstPage() {
-        if (flipbookInstance) {
-            flipbookInstance.turn("page", 1);
-        }
+        if (flipbookInstance) flipbookInstance.turn("page", 1);
     }
 
     function goToLastPage() {
-        if (flipbookInstance) {
-            flipbookInstance.turn("page", totalPagesCount);
-        }
+        if (flipbookInstance) flipbookInstance.turn("page", totalPagesCount);
     }
 
     // Klavye kontrolleri
-    document.addEventListener('keydown', function(e) {
+    document.addEventListener('keydown', function (e) {
         if (e.key === 'ArrowLeft') {
             previousPage();
         } else if (e.key === 'ArrowRight') {
@@ -420,20 +422,22 @@
     });
 
     // Sayfa yüklendiğinde PDF'i yükle
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
         loadPDF();
     });
 
     // Pencere boyutu değiştiğinde flipbook'u yeniden boyutlandır
-    window.addEventListener('resize', function() {
+    window.addEventListener('resize', function () {
         if (flipbookInstance) {
             const containerWidth = Math.min(1400, window.innerWidth - 60);
             const containerHeight = Math.min(800, window.innerHeight - 200);
+            const displayMode = window.innerWidth <= 600 ? 'single' : 'double';
 
             flipbookInstance.turn("size", containerWidth, containerHeight);
+            flipbookInstance.turn("display", displayMode);
         }
     });
 
-    // Smooth scroll behavior
+    // Smooth scroll
     document.documentElement.style.scrollBehavior = 'smooth';
 </script>
