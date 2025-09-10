@@ -1,4 +1,7 @@
+using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
+using System.Net.Mail;
+using System.Net;
 using Inza_Home.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -67,6 +70,50 @@ namespace Inza_Home.Controllers
 
             // yoksa anasayfa
             return RedirectToAction("Index", "Home");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ContactForm([FromForm] ContactFormDto dto)
+        {
+            if (!ModelState.IsValid)
+                return Json(new { ok = false, message = "Form hatalý dolduruldu." });
+
+            try
+            {
+
+                using (MailMessage mailMessage = new MailMessage())
+                {
+                    string Mail = "info@inzahome.com";
+
+                    mailMessage.From = new MailAddress(Mail, "Inza Home Web");
+                    mailMessage.Subject = "Inza Home Müþteri Ýletiþim Formu";
+                    mailMessage.Body = $@"Ad: {dto.FullName}
+                          Tel: {dto.Phone}
+                          Mail: {dto.Email}
+                          Mesaj: {dto.Message}";
+                    mailMessage.IsBodyHtml = false;
+
+                    // Alýcý = sizin kendi info adresiniz olabilir, dto.Email müþteriye gitmesin
+                    mailMessage.To.Add("info@inzahome.com");
+
+                    using (SmtpClient smtp = new SmtpClient("mail.kurumsaleposta.com", 587))
+                    {
+                        smtp.EnableSsl = false;
+                        smtp.UseDefaultCredentials = false;
+                        smtp.Credentials = new NetworkCredential(Mail, "RaDus246RaDus");
+                        smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+                        smtp.Send(mailMessage);
+                    }
+                }
+                Console.WriteLine("Mail baþarýyla gönderildi!");
+
+                return Json(new { ok = true, message = "Teþekkürler! Mesajýnýz alýndý." });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Genel Hata: {ex.Message}");
+                return Json(new { ok = false, message = "Mail gönderilemedi: " + ex.Message });
+            }
         }
         public static class CollectionRepository
         {
@@ -325,6 +372,19 @@ namespace Inza_Home.Controllers
             public string Description { get; set; } = string.Empty;
             public List<string> Images { get; set; } = new List<string>();
         }
+
+        public class ContactFormDto
+        {
+            [Required, StringLength(120)]
+            public string FullName { get; set; }
+            [Required, StringLength(40)]
+            public string Phone { get; set; }
+            [Required, EmailAddress, StringLength(120)]
+            public string Email { get; set; }
+            [Required, StringLength(4000)]
+            public string Message { get; set; }
+        }
+
     }
 
 }

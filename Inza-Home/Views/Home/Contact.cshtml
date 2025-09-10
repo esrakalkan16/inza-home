@@ -41,7 +41,10 @@
             <div class="col-lg-7">
                 <div class="info-card">
                     <h3 class="card-title">@HelperFunctions.Translate("Bize Yazın")</h3>
-                    <form action="@Url.Action("ContactForm","Home")" method="post" class="contact-form">
+
+                    <form id="contactForm" action="/Home/ContactForm" method="post" class="contact-form" novalidate>
+                        @Html.AntiForgeryToken()
+
                         <div class="row g-3">
                             <div class="col-md-6">
                                 <label class="form-label">@HelperFunctions.Translate("Ad Soyad") *</label>
@@ -60,13 +63,16 @@
                                 <textarea name="Message" rows="5" class="form-textarea" required></textarea>
                             </div>
                             <div class="col-12">
-                                <button type="submit" class="submit-btn">@HelperFunctions.Translate("Gönder")</button>
+                                <button type="submit" id="submitBtn" class="submit-btn">
+                                    @HelperFunctions.Translate("Gönder")
+                                </button>
+                                <div id="formMsg" class="mt-2" style="font-size:.95rem;"></div>
                             </div>
                         </div>
                     </form>
                 </div>
             </div>
-        </div>
+
 
         <!-- Harita -->
         <div class="map-section mt-5">
@@ -77,6 +83,56 @@
         </div>
     </div>
 </section>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const form = document.getElementById("contactForm");
+      const btn  = document.getElementById("submitBtn");
+      const msg  = document.getElementById("formMsg");
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        msg.textContent = "";
+        btn.disabled = true;
+        btn.textContent = "Gönderiliyor...";
+
+        const token = form.querySelector('input[name="__RequestVerificationToken"]')?.value;
+        const body  = new URLSearchParams(new FormData(form));
+
+        try {
+          const res = await fetch(form.action, {
+            method: "POST",
+            headers: {
+              "RequestVerificationToken": token,
+              "X-Requested-With": "XMLHttpRequest",
+              "Accept": "application/json"
+            },
+            body
+          });
+          console.log("ContactForm status:", res.status); // DEBUG
+          const data = await res.json();
+          console.log("ContactForm response:", data);      // DEBUG
+
+          if (data.ok) {
+            form.reset();
+            msg.style.color = "#1a7f37";
+            msg.textContent = data.message || "Mesajınız başarıyla gönderildi.";
+          } else {
+            msg.style.color = "#b42318";
+            msg.textContent = data.message || "Gönderim sırasında bir hata oluştu.";
+          }
+        } catch (err) {
+          console.error(err); // DEBUG
+          msg.style.color = "#b42318";
+          msg.textContent = "Sunucuya ulaşılamadı. Lütfen tekrar deneyin.";
+        } finally {
+          btn.disabled = false;
+          btn.textContent = "Gönder";
+        }
+      });
+    });
+</script>
 
 <style>
     .contact-section {

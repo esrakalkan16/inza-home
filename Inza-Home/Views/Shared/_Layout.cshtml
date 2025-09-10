@@ -10,22 +10,19 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>@ViewData["Title"] - Inza Home</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">//-
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullpage.js@4/dist/fullpage.min.css" />
+    <link href="~/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/fullpage.min.css" />
     <link href="~/css/site.css" rel="stylesheet" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/turn.js/4/turn.min.css" />
-
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/turn.js/4/turn.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
-    <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/fullpage.js@4/dist/fullpage.min.js"></script>
-
+    <link href="~/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <script src="~/js/jquery-3.6.0.min.js"></script>
+    <script src="~/js/gsap.min.js"></script>
+    <script src="~/js/ScrollTrigger.min.js"></script>
+    <script src="~/js/three.min.js"></script>
+    <script src="~/js/fullpage.min.js"></script>
     <script src="~/js/splittext-init.js"></script>
 </head>
 <body>
@@ -192,7 +189,7 @@
                                 </div>
                                 <div class="contact-content">
                                     <h4>WhatsApp</h4>
-                                    <a href="https://wa.me/906037924586">0533 792 48 60</a>
+                                    <a href="https://wa.me/905337924860">0533 792 48 60</a>
                                 </div>
                             </div>
 
@@ -231,13 +228,60 @@
                 <div class="footer-bottom-content">
                     <div class="copyright">
                         @HelperFunctions.Translate("© 2025 İnza Home Furniture. Tüm hakları saklıdır.")
+                        <span class="signature">Esra Kalkan</span>
                     </div>
                 </div>
             </div>
         </div>
     </footer>
+    <style>
+        .copyright {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+            color: #ccc;
+        }
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+        .signature {
+            font-family: 'Pacifico', cursive; /* Google Fonts ile ekleyebilirsin */
+            font-size: 1.1rem;
+            color: #ffcc88;
+            position: absolute;
+            left: 0;
+            bottom: 150%;
+            opacity: 0;
+            white-space: nowrap;
+            overflow: hidden;
+            width: 0;
+            border-right: 2px solid #ffcc88;
+            transition: opacity 0.3s ease;
+        }
+
+        /* Hoverda typing effect */
+        .copyright:hover .signature {
+            opacity: 1;
+            width: 120px; /* isme göre ayarla */
+            animation: typing 2s steps(20, end) forwards, blink 0.7s step-end infinite;
+        }
+
+        @@keyframes typing {
+            from {
+                width: 0;
+            }
+
+            to {
+                width: 120px;
+            }
+        }
+
+        @@keyframes blink {
+            50% {
+                border-color: transparent;
+            }
+        }
+    </style>
+
+    <script src="~/js/bootstrap.bundle.min.js"></script>
     @RenderSection("Scripts", required: false)
     <script>
         // Scroll efekti

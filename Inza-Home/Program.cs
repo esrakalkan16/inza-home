@@ -1,7 +1,7 @@
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 builder.Services.AddSession(options =>
 {
     options.IdleTimeout = TimeSpan.FromMinutes(30); // Session süresi
@@ -9,7 +9,6 @@ builder.Services.AddSession(options =>
     options.Cookie.IsEssential = true;
 });
 builder.Services.AddHttpContextAccessor(); // IHttpContextAccessor servisini ekle
-
 var app = builder.Build();
 var accessor = app.Services.GetRequiredService<IHttpContextAccessor>();
 SessionHelper.Configure(accessor);

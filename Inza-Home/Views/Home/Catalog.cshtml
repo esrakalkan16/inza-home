@@ -1,443 +1,450 @@
-﻿
-@{
-    ViewData["Title"] = "INZA HOME Katalog";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
-
-
-<style>
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
+﻿﻿
+    @{
+        ViewData["Title"] = "INZA HOME Katalog";
+        Layout = "~/Views/Shared/_Layout.cshtml";
     }
 
-    body {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        min-height: 100vh;
-        overflow-x: hidden;
-    }
 
-    /* Header Section */
-    .header-section {
-        text-align: center;
-        padding: 1rem 0;
-        color: white;
-        background: rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(10px);
-        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-    }
-
-        .header-section h1 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        .header-section p {
-            font-size: 1.1rem;
-            opacity: 0.9;
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
         }
 
-    /* Main Catalog Section */
-    .catalog-section {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: calc(100vh - 250px);
-        padding: 2rem;
-    }
-
-    #flipbook {
-        margin: 0 auto;
-        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
-        border-radius: 15px;
-        overflow: hidden;
-        background: rgb(143 135 122 / 59%);
-        ;
-    }
-
-        #flipbook .page {
-            background: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            border: 1px solid #e0e0e0;
-        }
-
-            #flipbook .page canvas {
-                max-width: 100%;
-                max-height: 100%;
-                object-fit: contain;
-            }
-
-    /* Controls Section */
-    .controls-section {
-        text-align: center;
-        padding: 2rem 0;
-        background: rgba(255, 255, 255, 0.05);
-        backdrop-filter: blur(10px);
-    }
-
-    .controls-wrapper {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 1rem;
-        flex-wrap: wrap;
-    }
-
-    .control-btn {
-        background: rgba(255, 255, 255, 0.2);
-        border: 2px solid rgba(255, 255, 255, 0.3);
-        color: white;
-        padding: 12px 24px;
-        border-radius: 30px;
-        cursor: pointer;
-        font-size: 16px;
-        font-weight: 600;
-        transition: all 0.3s ease;
-        backdrop-filter: blur(15px);
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-    }
-
-        .control-btn:hover {
-            background: rgba(255, 255, 255, 0.3);
-            border-color: rgba(255, 255, 255, 0.5);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-        }
-
-        .control-btn:active {
-            transform: translateY(-1px);
-        }
-
-    .page-info-section {
-        text-align: center;
-        color: white;
-        padding: 1rem 0;
-        font-size: 1.2rem;
-        font-weight: 600;
-    }
-
-    .page-info-wrapper {
-        display: inline-flex;
-        align-items: center;
-        gap: 1rem;
-        background: rgb(67 55 38 / 27%);
-        padding: 0.75rem 1.5rem;
-        border-radius: 25px;
-        border: 1px solid rgba(255, 255, 255, 0.2);
-    }
-
-    /* Loading Section */
-    .loading-section {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        min-height: 60vh;
-        color: white;
-    }
-
-    .loading-spinner {
-        width: 50px;
-        height: 50px;
-        border: 4px solid rgba(255, 255, 255, 0.3);
-        border-radius: 50%;
-        border-top-color: #2d1e0a78          ;
-        animation: spin 1s ease-in-out infinite;
-        margin-bottom: 2rem;
-    }
-
-    .loading-text {
-        font-size: 1.3rem;
-        font-weight: 600;
-        text-align: center;
-    }
-
-    @@keyframes spin {
-        to {
-            transform: rotate(360deg);
-        }
-    }
-
-    /* Responsive Design */
-    @@media (max-width: 1400px) {
-        #flipbook {
-            transform: scale(0.9);
-        }
-    }
-
-    @@media (max-width: 1200px) {
-        #flipbook {
-            transform: scale(0.8);
-        }
-
-        .header-section h1 {
-            font-size: 2rem;
-        }
-    }
-
-    @@media (max-width: 900px) {
-        #flipbook {
-            transform: scale(0.65);
-        }
-
-        .header-section h1 {
-            font-size: 1.8rem;
-        }
-
-        .catalog-section {
-            padding: 1rem;
-        }
-    }
-
-    @@media (max-width: 600px) {
-        #flipbook {
-            transform: scale(0.5);
-            height: 500px !important;
-        }
-
+        /* Header Section */
         .header-section {
+            text-align: center;
             padding: 1rem 0;
+            color: white;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
         }
 
             .header-section h1 {
-                font-size: 1.5rem;
+                font-size: 2.5rem;
+                font-weight: 700;
+                margin-bottom: 0.5rem;
+                text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
             }
 
-        .control-btn {
-            padding: 10px 18px;
-            font-size: 14px;
+            .header-section p {
+                font-size: 1.1rem;
+                opacity: 0.9;
+            }
+
+        /* Main Catalog Section */
+        .catalog-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: calc(100vh - 250px);
+            padding: 2rem;
+        }
+
+        #flipbook {
+            margin: 0 auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            border-radius: 15px;
+            overflow: hidden;
+            background: rgb(143 135 122 / 59%);
+            ;
+        }
+
+            #flipbook .page {
+                background: white;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                overflow: hidden;
+                border: 1px solid #e0e0e0;
+            }
+
+                #flipbook .page canvas {
+                    max-width: 100%;
+                    max-height: 100%;
+                    object-fit: contain;
+                }
+
+        /* Controls Section */
+        .controls-section {
+            text-align: center;
+            padding: 2rem 0;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
         }
 
         .controls-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .control-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(15px);
+            display: flex;
+            align-items: center;
             gap: 0.5rem;
         }
-    }
 
-    /* Animation enhancemnets */
-    .section {
-        animation: fadeInUp 0.6s ease-out;
-    }
+            .control-btn:hover {
+                background: rgba(255, 255, 255, 0.3);
+                border-color: rgba(255, 255, 255, 0.5);
+                transform: translateY(-3px);
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            }
 
-    @@keyframes fadeInUp {
-        from {
-            opacity: 0;
-            transform: translateY(20px);
+            .control-btn:active {
+                transform: translateY(-1px);
+            }
+
+        .page-info-section {
+            text-align: center;
+            color: white;
+            padding: 1rem 0;
+            font-size: 1.2rem;
+            font-weight: 600;
         }
 
-        to {
-            opacity: 1;
-            transform: translateY(0);
+        .page-info-wrapper {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            background: rgb(67 55 38 / 27%);
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
-    }
 
-    .control-btn::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-        transition: left 0.5s;
-    }
+        /* Loading Section */
+        .loading-section {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 60vh;
+            color: white;
+        }
 
-    .control-btn:hover::before {
-        left: 100%;
-    }
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: #2d1e0a78;
+            animation: spin 1s ease-in-out infinite;
+            margin-bottom: 2rem;
+        }
 
-</style>
+        .loading-text {
+            font-size: 1.3rem;
+            font-weight: 600;
+            text-align: center;
+        }
 
+        @@keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
 
-<!-- Header Section -->
-<section class="header-section section">
-    <h1>İNZA HOME</h1>
-    <p>@HelperFunctions.Translate("2025 Katalog Koleksiyonu")</p>
-</section>
+        /* Responsive Design */
+        @@media (max-width: 1400px) {
+            #flipbook {
+                transform: scale(0.9);
+            }
+        }
 
-<!-- Loading Section -->
-<section class="loading-section section" id="loading" style="color: #2d1e0a78;">
-    <div class="loading-spinner"></div>
-    <div class="loading-text">
-        <p>@HelperFunctions.Translate("Katalog yükleniyor...")</p>
-        <small>@HelperFunctions.Translate("Lütfen bekleyiniz")</small>
-    </div>
-</section>
+        @@media (max-width: 1200px) {
+            #flipbook {
+                transform: scale(0.8);
+            }
 
-<!-- Main Catalog Section -->
-<section class="catalog-section section" style="display: none;" id="catalogContainer">
-    <div id="flipbook"></div>
-</section>
+            .header-section h1 {
+                font-size: 2rem;
+            }
+        }
 
+        @@media (max-width: 900px) {
+            #flipbook {
+                transform: scale(0.65);
+            }
 
-<section class="page-info-section section" id="pageInfo">
-    <div class="page-info-wrapper">
-        <span>@HelperFunctions.Translate("Sayfa"):</span>
-        <span class="page-current" id="currentPage">1</span>
-        <span>/</span>
-        <span id="totalPages">1</span>
-    </div>
-</section>
+            .header-section h1 {
+                font-size: 1.8rem;
+            }
 
-<!-- jQuery -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<!-- turn.js -->
-<script src="~/lib/turnjs/turn.js"></script>
-<!-- pdf.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.13.216/pdf.min.js"></script>
+            .catalog-section {
+                padding: 1rem;
+            }
+        }
 
-<script>
-    let flipbookInstance;
-    let totalPagesCount = 0;
+        @@media (max-width: 600px) {
+            #flipbook {
+                transform: scale(0.9);
+                height: 500px !important;
+            }
 
-    const pdfUrl = '/pdfs/InzaHome2025.pdf';
+            .header-section {
+                padding: 1rem 0;
+            }
 
-    // Flipbook init fonksiyonu
-    function initFlipbook(containerWidth, containerHeight) {
-        // Ekran genişliğine göre tek/çift sayfa
-        const displayMode = window.innerWidth <= 600 ? 'single' : 'double';
-
-        $("#flipbook").turn({
-            width: containerWidth,
-            height: containerHeight,
-            autoCenter: true,
-            display: displayMode,
-            acceleration: true,
-            gradients: true,
-            elevation: 50,
-            duration: 1200,
-            when: {
-                turned: function (event, page) {
-                    document.getElementById('currentPage').textContent = page;
-                    updatePageInfo();
+                .header-section h1 {
+                    font-size: 1.5rem;
                 }
-            }
-        });
 
-        flipbookInstance = $("#flipbook");
-    }
-
-    // PDF yükleme
-    function loadPDF() {
-        const flipbook = document.getElementById('flipbook');
-
-        pdfjsLib.getDocument(pdfUrl).promise.then(pdf => {
-            totalPagesCount = pdf.numPages;
-            document.getElementById('totalPages').textContent = totalPagesCount;
-
-            let renderPromises = [];
-
-            for (let i = 1; i <= totalPagesCount; i++) {
-                renderPromises.push(
-                    pdf.getPage(i).then(page => {
-                        let scale = 2.5;
-                        let viewport = page.getViewport({ scale });
-
-                        let canvas = document.createElement("canvas");
-                        let context = canvas.getContext("2d");
-                        canvas.height = viewport.height;
-                        canvas.width = viewport.width;
-
-                        return page.render({
-                            canvasContext: context,
-                            viewport: viewport
-                        }).promise.then(() => {
-                            let pageDiv = document.createElement("div");
-                            pageDiv.classList.add("page");
-                            pageDiv.appendChild(canvas);
-                            return pageDiv;
-                        });
-                    })
-                );
+            .control-btn {
+                padding: 10px 18px;
+                font-size: 14px;
             }
 
-            Promise.all(renderPromises).then(pages => {
-                // Tüm sayfaları flipbook içine ekle
-                pages.forEach(page => flipbook.appendChild(page));
-
-                const containerWidth = Math.min(1400, window.innerWidth - 60);
-                const containerHeight = Math.min(800, window.innerHeight - 200);
-
-                // ✅ responsive init
-                initFlipbook(containerWidth, containerHeight);
-
-                // Loading'i gizle, kataloğu göster
-                setTimeout(() => {
-                    document.getElementById('loading').style.display = 'none';
-                    document.getElementById('catalogContainer').style.display = 'flex';
-                    document.getElementById('controls').style.display = 'block';
-                    document.getElementById('pageInfo').style.display = 'block';
-                }, 500);
-            });
-
-        }).catch(error => {
-            console.error('PDF yükleme hatası:', error);
-            document.querySelector('.loading-text').innerHTML =
-                '<p>Katalog yüklenemedi</p><small>Lütfen sayfayı yenileyip tekrar deneyin.</small>';
-        });
-    }
-
-    // Sayfa bilgisi güncelleme
-    function updatePageInfo() {
-        const currentPage = flipbookInstance ? flipbookInstance.turn("page") : 1;
-        document.getElementById('currentPage').textContent = currentPage;
-    }
-
-    // Kontrol fonksiyonları
-    function previousPage() {
-        if (flipbookInstance) flipbookInstance.turn("previous");
-    }
-
-    function nextPage() {
-        if (flipbookInstance) flipbookInstance.turn("next");
-    }
-
-    function goToFirstPage() {
-        if (flipbookInstance) flipbookInstance.turn("page", 1);
-    }
-
-    function goToLastPage() {
-        if (flipbookInstance) flipbookInstance.turn("page", totalPagesCount);
-    }
-
-    // Klavye kontrolleri
-    document.addEventListener('keydown', function (e) {
-        if (e.key === 'ArrowLeft') {
-            previousPage();
-        } else if (e.key === 'ArrowRight') {
-            nextPage();
-        } else if (e.key === 'Home') {
-            goToFirstPage();
-        } else if (e.key === 'End') {
-            goToLastPage();
+            .controls-wrapper {
+                gap: 0.5rem;
+            }
         }
-    });
 
-    // Sayfa yüklendiğinde PDF'i yükle
-    document.addEventListener('DOMContentLoaded', function () {
-        loadPDF();
-    });
+        /* Animation enhancemnets */
+        .section {
+            animation: fadeInUp 0.6s ease-out;
+        }
 
-    // Pencere boyutu değiştiğinde flipbook'u yeniden boyutlandır
-    window.addEventListener('resize', function () {
-        if (flipbookInstance) {
-            const containerWidth = Math.min(1400, window.innerWidth - 60);
-            const containerHeight = Math.min(800, window.innerHeight - 200);
+        @@keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .control-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .control-btn:hover::before {
+            left: 100%;
+        }
+
+    </style>
+
+
+    <!-- Header Section -->
+    <section class="header-section section">
+        <h1>İNZA HOME</h1>
+        <p>@HelperFunctions.Translate("2025 Katalog Koleksiyonu")</p>
+    </section>
+
+    <!-- Loading Section -->
+    <section class="loading-section section" id="loading" style="color: #2d1e0a78;">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">
+            <p>@HelperFunctions.Translate("Katalog yükleniyor...")</p>
+            <small>@HelperFunctions.Translate("Lütfen bekleyiniz")</small>
+        </div>
+    </section>
+
+    <!-- Main Catalog Section -->
+    <section class="catalog-section section" style="display: none;" id="catalogContainer">
+        <div id="flipbook"></div>
+    </section>
+
+
+    <section class="page-info-section section" id="pageInfo" style="padding-top:0px;padding-bottom:0px;">
+        <div class="page-info-wrapper" style="padding: 5px 20px;border-radius: 8px;">
+            <span>@HelperFunctions.Translate("Sayfa"):</span>
+            <span class="page-current" id="currentPage">1</span>
+            <span>/</span>
+            <span id="totalPages">1</span>
+        </div>
+    </section>
+    <!-- Kontrol Butonları -->
+<section class="controls-section section" id="controls" style="display:none;padding-top:5px;">
+    <div class="controls-wrapper">
+        <button class="btn btn-brown px-4" onclick="previousPage()">⬅ Önceki</button>
+        <button class="btn btn-brown px-4" onclick="nextPage()">Sonraki ➡</button>
+    </div>
+</section>
+
+    <script src="~/lib/turnjs/turn.js"></script>
+    <script src="~/js/pdf.min.js"></script>
+    <script src="~/js/pdf.worker.min.js"></script>
+
+    <script>
+        let flipbookInstance;
+        let totalPagesCount = 0;
+
+        const pdfUrl = '/pdfs/InzaHome2025.pdf';
+
+            function initFlipbook(containerWidth, containerHeight) {
+            // Ekran genişliğine göre tek/çift sayfa
             const displayMode = window.innerWidth <= 600 ? 'single' : 'double';
 
-            flipbookInstance.turn("size", containerWidth, containerHeight);
-            flipbookInstance.turn("display", displayMode);
-        }
-    });
+            $("#flipbook").turn({
+                width: containerWidth,
+                height: containerHeight,
+                autoCenter: true,
+                display: displayMode,
+                acceleration: true,
+                gradients: true,
+                cornerSize: 200,
+                elevation: 50,
+                duration: 1200,
+                when: {
+                    turned: function (event, page) {
+                        document.getElementById('currentPage').textContent = page;
+                        updatePageInfo();
+                    }
+                }
+            });
 
-    // Smooth scroll
-    document.documentElement.style.scrollBehavior = 'smooth';
-</script>
+            flipbookInstance = $("#flipbook");
+        }
+
+
+
+
+        // PDF yükleme
+        function loadPDF() {
+            const flipbook = document.getElementById('flipbook');
+
+            pdfjsLib.getDocument(pdfUrl).promise.then(pdf => {
+                totalPagesCount = pdf.numPages;
+                document.getElementById('totalPages').textContent = totalPagesCount;
+
+                let renderPromises = [];
+
+                for (let i = 1; i <= totalPagesCount; i++) {
+                    renderPromises.push(
+                        pdf.getPage(i).then(page => {
+                            let scale = 2.5;
+                            let viewport = page.getViewport({ scale });
+
+                            let canvas = document.createElement("canvas");
+                            let context = canvas.getContext("2d");
+                            canvas.height = viewport.height;
+                            canvas.width = viewport.width;
+
+                            return page.render({
+                                canvasContext: context,
+                                viewport: viewport
+                            }).promise.then(() => {
+                                let pageDiv = document.createElement("div");
+                                pageDiv.classList.add("page");
+                                pageDiv.appendChild(canvas);
+                                return pageDiv;
+                            });
+                        })
+                    );
+                }
+
+                Promise.all(renderPromises).then(pages => {
+                    // Tüm sayfaları flipbook içine ekle
+                    pages.forEach(page => flipbook.appendChild(page));
+
+                    const containerWidth = Math.min(1400, window.innerWidth - 60);
+                    const containerHeight = Math.min(800, window.innerHeight - 200);
+
+                    // ✅ responsive init
+                    initFlipbook(containerWidth, containerHeight);
+
+                    // Loading'i gizle, kataloğu göster
+                    setTimeout(() => {
+                        document.getElementById('loading').style.display = 'none';
+                        document.getElementById('catalogContainer').style.display = 'flex';
+                        if( document.getElementById('controls')){  document.getElementById('controls').style.display = 'block'; }
+                        if( document.getElementById('pageInfo')){  document.getElementById('pageInfo').style.display = 'block'; }
+                    }, 500);
+                });
+
+            }).catch(error => {
+                console.error('PDF yükleme hatası:', error);
+                document.querySelector('.loading-text').innerHTML =
+                    '<p>Katalog yüklenemedi</p><small>Lütfen sayfayı yenileyip tekrar deneyin.</small>';
+            });
+        }
+
+        // Sayfa bilgisi güncelleme
+        function updatePageInfo() {
+            const currentPage = flipbookInstance ? flipbookInstance.turn("page") : 1;
+            document.getElementById('currentPage').textContent = currentPage;
+        }
+
+        // Kontrol fonksiyonları
+        function previousPage() {
+            if (flipbookInstance) flipbookInstance.turn("previous");
+        }
+
+        function nextPage() {
+            if (flipbookInstance) flipbookInstance.turn("next");
+        }
+
+        function goToFirstPage() {
+            if (flipbookInstance) flipbookInstance.turn("page", 1);
+        }
+
+        function goToLastPage() {
+            if (flipbookInstance) flipbookInstance.turn("page", totalPagesCount);
+        }
+
+        // Klavye kontrolleri
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'ArrowLeft') {
+                previousPage();
+            } else if (e.key === 'ArrowRight') {
+                nextPage();
+            } else if (e.key === 'Home') {
+                goToFirstPage();
+            } else if (e.key === 'End') {
+                goToLastPage();
+            }
+        });
+
+        // Sayfa yüklendiğinde PDF'i yükle
+        document.addEventListener('DOMContentLoaded', function () {
+            loadPDF();
+        });
+
+            // Pencere boyutu değiştiğinde flipbook'u yeniden boyutlandır
+            window.addEventListener('resize', function () {
+                if (flipbookInstance) {
+                    const containerWidth = Math.min(1400, window.innerWidth - 60);
+                    const containerHeight = Math.min(800, window.innerHeight - 200);
+                    const displayMode = window.innerWidth <= 600 ? 'single' : 'double';
+
+                    flipbookInstance.turn("size", containerWidth, containerHeight);
+                    flipbookInstance.turn("display", displayMode);
+                }
+            });
+
+        // Smooth scroll
+        document.documentElement.style.scrollBehavior = 'smooth';
+    </script>
