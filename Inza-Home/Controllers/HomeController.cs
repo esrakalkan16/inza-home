@@ -4,35 +4,75 @@ using System.Net.Mail;
 using System.Net;
 using Inza_Home.Models;
 using Microsoft.AspNetCore.Mvc;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Inza_Home.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly TxtDbContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController()
         {
-            _logger = logger;
+            var dataPath= Path.Combine(Directory.GetCurrentDirectory(), "Data");
+            _context = new TxtDbContext(dataPath);
+
+            _context.Init<Collection>();
+            _context.Init<CollectionImage>();
+
         }
         public IActionResult Index()
         {
-            var collections = DataManager.GetCollections();
-            return View(collections);
+
+            var model = new HomeIndexViewModel
+            {
+
+                Collections = _context.GetAll<Collection>(),
+                CollectionImages = _context.GetAll<CollectionImage>()
+
+            };
+          
+            return View(model);
         }
         public IActionResult Collections()
         {
-            var collections = DataManager.GetCollections();
-            return View(collections);
+             var collections = _context.GetAll<Collection>();
+            var images = _context.GetAll<CollectionImage>();
+
+            var vm = collections.Select(c=> new CollectionVm
+            {
+                Id = c.Id,
+                Name = c.Name,
+                Description = c.Description, // veya Description
+                CoverImage = images.FirstOrDefault(i => i.CollectionId == c.Id && i.DefaultImage)?.ImageUrl
+            }).ToList();
+
+            return View(vm);
         }
         public IActionResult CollectionDetail(int id)
         {
    
-            var collection = DataManager.GetCollections().FirstOrDefault(c => c.Id == id);
+            var collections = _context.GetAll<Collection>();
+            var images = _context.GetAll<CollectionImage>();
+
+
+          var collection = collections.FirstOrDefault(c => c.Id == id);
             if (collection == null)
                 return NotFound();
 
-            return View(collection);
+            var vm = new CollectionVm
+            {
+
+                Id = collection.Id,
+                Name = collection.Name,
+                Description = collection.Description2, // veya Description
+                CoverImage = images.FirstOrDefault(i => i.CollectionId == collection.Id && i.DefaultImage)?.ImageUrl,
+                Images = images.Where(i => i.CollectionId == collection.Id)
+                       .Select(i => i.ImageUrl)
+                       .ToList()
+            };
+
+            return View(vm);
         }
         public IActionResult AboutUs()
         {
@@ -66,7 +106,6 @@ namespace Inza_Home.Controllers
             // yoksa anasayfa
             return RedirectToAction("Index", "Home");
         }
-
         [HttpPost]
         public async Task<IActionResult> ContactForm([FromForm] ContactFormDto dto)
         {
@@ -121,6 +160,7 @@ namespace Inza_Home.Controllers
             [Required, StringLength(4000)]
             public string Message { get; set; }
         }
+     
 
     }
 

@@ -1,16 +1,15 @@
-﻿@model List<Inza_Home.Models.CollectionModel>
-
+﻿@model Inza_Home.Models.HomeIndexViewModel
 @{
     ViewData["Title"] = HelperFunctions.Translate("Anasayfa");
 
 }
 
 
-
 <section class="hero-wrap" style="margin-top: -80px; padding-top: 80px;">
     <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="6000">
         <div class="carousel-indicators">
-            @for (int i = 0; i < Model.Count; i++)
+
+            @for (int i = 0; i < Model.Collections.Where(m=>m.ShowSlider == true).ToList().Count; i++)
             {
                 <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="@i"
                         class="@(i==0?"active":"")"
@@ -20,31 +19,33 @@
         </div>
 
         <div class="carousel-inner">
-            @for (int i = 0; i < Model.Count; i++)
+            @for (int i = 0; i < Model.Collections.Where(m => m.ShowSlider == true).ToList().Count; i++)
             {
-                var s = Model[i];
+                var s = Model.Collections.Where(m => m.ShowSlider == true).ToList()[i];
+                var Image = Model.CollectionImages.Where(m => m.CollectionId == s.Id && m.DefaultImage == true).FirstOrDefault();
+
                 <div class="carousel-item @(i==0?"active":"")">
-                    <img src="@s.CoverImage" class="d-block w-100 hero-img zoom-img" alt="@HelperFunctions.Translate(s.Name)">
+                    <img src="@Image.ImageUrl" class="d-block w-100 hero-img zoom-img" alt="@HelperFunctions.Translate(s.Name)">
                     <div class="hero-overlay"></div>
 
                     <div class="carousel-caption d-md-block text-start caption-animate">
                         <h2 class="hero-title fw-semibold text-white mb-3">@HelperFunctions.Translate(s.Name)</h2>
+                        <!-- Slider açıklaması -->
                         <p class="hero-desc text-white-50 mb-4">@s.Description</p>
                         <div class="d-flex flex-column flex-md-row gap-3">
                             <span class="star-border-container">
                                 <span class="border-gradient-top"></span>
                                 <span class="border-gradient-bottom"></span>
                                 <a asp-controller="Home" asp-action="CollectionDetail" asp-route-id="@s.Id"
-                                   class="btn btn-light  px-4 py-3 fw-medium">
+                                   class="btn btn-light px-4 py-3 fw-medium">
                                     @HelperFunctions.Translate("Detay")
                                 </a>
                             </span>
                             <span class="star-border-container">
                                 <span class="border-gradient-top"></span>
                                 <span class="border-gradient-bottom"></span>
-
                                 <a asp-controller="Home" asp-action="Collections"
-                                   class="btn btn-brown  px-4 py-3 fw-medium">
+                                   class="btn btn-brown px-4 py-3 fw-medium">
                                     @HelperFunctions.Translate("Koleksiyonlar")
                                 </a>
                             </span>
@@ -65,91 +66,61 @@
     </div>
 </section>
 
-
 <section id="collections" class="collections-section">
+    @{
+        var isEven = true;
+        foreach (var item in Model.Collections.Where(m=>m.ShowCard == true).ToList())
+        {
+            var defaultImage = Model.CollectionImages.FirstOrDefault(img => img.CollectionId == item.Id && img.DefaultImage);
+            <div class="collection-block fade-up">
+                <div class="container">
+                    <div class="row align-items-center">
 
-    <!-- Gonca - Yazı solda, resim sağda -->
-    <div class="collection-block fade-up">
-        <div class="container">
-            <div class="row align-items-center">
-                <!-- Yazı -->
-                <div class="col-lg-6">
-                    <div class="content-wrap">
-                        <h2 class="h2 fw-bold mb-3">@HelperFunctions.Translate("Gonca Koleksiyonu")</h2>
-                        <p class="text-muted mb-4">
-                            @HelperFunctions.Translate("Gonca Koleksiyonu, zarif ve yumuşak hatlarıyla evinize sıcaklık katar. Doğal tonlar ve konforlu tasarımıyla, her yaşam alanına uyum sağlar. Minimalist detaylar, modern yaşamın ihtiyaçlarına cevap verirken, estetik bir dokunuş sunar.")
-                        </p>
-                        <a href="@Url.Action("Collections","Home")" class="btn btn-brown px-4">@HelperFunctions.Translate("Koleksiyonu İncele")</a>
-                    </div>
-                </div>
-
-                <!-- Görsel -->
-                <div class="col-lg-6">
-                    <div class="image-box shadow-lg">
-                        <img src="~/images/Koleksiyonlar-2/Gonca/Gonca.jpg"
-                             alt="Gonca Koleksiyonu"
-                             class="img-fluid rounded-4">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Beren - Resim solda, yazı sağda -->
-    <div class="collection-block fade-up">
-        <div class="container">
-            <div class="row align-items-center">
-                <!-- Görsel -->
-                <div class="col-lg-6">
-                    <div class="image-box shadow-lg">
-                        <img src="~/images/Koleksiyonlar-2/Beren/Beren.jpg"
-                             alt="Beren Koleksiyonu"
-                             class="img-fluid rounded-4">
-                    </div>
-                </div>
-
-                <!-- Yazı -->
-                <div class="col-lg-6">
-                    <div class="content-wrap">
-                        <h2 class="h2 fw-bold mb-3">@HelperFunctions.Translate("Beren Koleksiyonu")</h2>
-                        <p class="text-muted mb-4">
-                            @HelperFunctions.Translate("Beren Koleksiyonu, modern yaşamın dinamik ruhunu yansıtır. Minimalist çizgileri, zarif detayları ve konforlu tasarımıyla hem estetik hem de işlevsellik ön plandadır. Evinizin her köşesine uyum sağlayan parçalar, yaşam alanlarınıza sofistike bir dokunuş katar.")
-                        </p>
-                        <a href="@Url.Action("Collections","Home")" class="btn btn-brown px-4">@HelperFunctions.Translate("Koleksiyonu İncele")</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Sude - Yazı solda, resim sağda -->
-    <div class="collection-block fade-up">
-        <div class="container">
-            <div class="row align-items-center">
-                <!-- Yazı -->
-                <div class="col-lg-6">
-                    <div class="content-wrap">
-                        <h2 class="h2 fw-bold mb-3">@HelperFunctions.Translate("Sude Koleksiyonu")</h2>
-                        <p class="text-muted mb-4">
-                            @HelperFunctions.Translate("Sude Koleksiyonu, doğallığın huzurunu ve çağdaş tasarımın sadeliğini bir araya getiriyor. Ferah oturma düzenleri, yumuşak tonlar ve zarif detaylarla evinize sıcaklık katar. Konforlu yaşam için tasarlanan parçalar, hem günlük kullanımda hem de özel anlarda keyifli bir ortam oluşturur.")
-                        </p>
-                        <a href="@Url.Action("Collections","Home")" class="btn btn-brown px-4">@HelperFunctions.Translate("Koleksiyonu İncele")</a>
-                    </div>
-                </div>
-
-                <!-- Görsel -->
-                <div class="col-lg-6">
-                    <div class="image-box shadow-lg">
-                        <img src="~/images/Koleksiyonlar-2/Sude/Sude.jpg"
-                             alt="Sude Koleksiyonu"
-                             class="img-fluid rounded-4">
+                        @if (isEven)
+                        {
+                            isEven = false;
+                            <!-- Yazı solda -->
+                            <div class="col-lg-6">
+                                <div class="content-wrap">
+                                    <h2 class="h2 fw-bold mb-3">@item.Name</h2>
+                                    <!-- Kart açıklaması (Description2) -->
+                                    <p class="text-muted mb-4">@item.Description</p>
+                                    <a href="@Url.Action("Collections","Home")" class="btn btn-brown px-4">
+                                        @HelperFunctions.Translate("Koleksiyonu İncele")
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="image-box shadow-lg">
+                                    <img src="@defaultImage.ImageUrl" alt="@item.Name" class="img-fluid rounded-4">
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            isEven = true;
+                            <!-- Yazı sağda -->
+                            <div class="col-lg-6 order-lg-2">
+                                <div class="content-wrap">
+                                    <h2 class="h2 fw-bold mb-3">@item.Name</h2>
+                                    <p class="text-muted mb-4">@item.Description</p>
+                                    <a href="@Url.Action("Collections","Home")" class="btn btn-brown px-4">
+                                        @HelperFunctions.Translate("Koleksiyonu İncele")
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 order-lg-1">
+                                <div class="image-box shadow-lg">
+                                    <img src="@defaultImage.ImageUrl" alt="@item.Name" class="img-fluid rounded-4">
+                                </div>
+                            </div>
+                        }
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
+        }
+    }
 </section>
-
 
 <!-- SIMPLE CTA SECTION -->
 <section class="py-5" style="background: #f1f1f1;">
